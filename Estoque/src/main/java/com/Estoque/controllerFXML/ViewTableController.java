@@ -89,7 +89,101 @@ public class ViewTableController {
         estilizandoBotoes();// Estilizar tamanho dos botoes e evitar codigo verboso
     }
 
- 
+    private void configurarColunaAlterar() {
+        colAlterar.setCellFactory(new Callback<TableColumn<Item, Void>, TableCell<Item, Void>>() {
+            @Override
+            public TableCell<Item, Void> call(TableColumn<Item, Void> param) {
+                return new TableCell<Item, Void>() {
+                    private Button btnAlterar = new Button();
+
+                    {              
+                    	btnAlterar.setGraphic(estilizandoBotoes().get(2));
+                    	btnAlterar.getStyleClass().add("btn");
+                    	btnAlterar.getStyleClass().add("btn-alterar");
+                        btnAlterar.setOnAction(event -> {
+                            Item item = getTableView().getItems().get(getIndex());
+                            chamarTelaDeAlterar(item);
+                        });
+                        setAlignment(Pos.CENTER);
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btnAlterar);
+                        }
+                    }
+                };
+            }
+        });
+    }
+
+    private void configurarColunaDeletar() {
+        colDeletar.setCellFactory(new Callback<TableColumn<Item, Void>, TableCell<Item, Void>>() {
+            @Override
+            public TableCell<Item, Void> call(TableColumn<Item, Void> param) {
+                return new TableCell<Item, Void>() {
+                    private final Button btnDeletar = new Button("");
+
+                    {
+                    	btnDeletar.setGraphic(estilizandoBotoes().get(1));
+                    	btnDeletar.getStyleClass().add("btn");
+                    	btnDeletar.getStyleClass().add("btn-deletar");
+                    	btnDeletar.setOnAction(event -> {
+                            Item item = getTableView().getItems().get(getIndex());
+                    		chamarTelaDeRemover(item);
+                    	});	
+                    	setAlignment(Pos.CENTER);
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btnDeletar);
+                        }
+                    }
+                };
+            }
+        });
+    }
+
+    private void configurarColunaAdicionar() {
+        colalterar.setCellFactory(new Callback<TableColumn<Item, Void>, TableCell<Item, Void>>() {
+            @Override
+            public TableCell<Item, Void> call(TableColumn<Item, Void> param) {
+                return new TableCell<Item, Void>() {
+                    private final Button btnAdicionar = new Button("");
+
+                    {
+                    	btnAdicionar.setGraphic(estilizandoBotoes().get(0));
+                    	btnAdicionar.getStyleClass().add("btn");
+                    	btnAdicionar.getStyleClass().add("btn-adicionar");
+                        btnAdicionar.setOnAction(event -> {
+                            Item item = getTableView().getItems().get(getIndex());
+                        	chamarTelaDeAdicionar(item);
+                        });
+                        setAlignment(Pos.CENTER);
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btnAdicionar);
+                        }
+                    }
+                };
+            }
+        });
+    }
 
     public void carregarItens() {
         try {
@@ -126,7 +220,80 @@ public class ViewTableController {
         }
     }
     
-  
+    @FXML
+    private void chamarTelaDeAlterar(Item item) {
+        // Obter o item selecionado na TableView
+
+        if (item != null) {  
+
+        	Platform.runLater(() -> {
+                FxWeaver fxWeaver = context.getBean(FxWeaver.class);
+                Parent root = fxWeaver.loadView(AlterScreenController.class);
+
+                AlterScreenController alterScreenController = fxWeaver.getBean(AlterScreenController.class);
+                alterScreenController.receberItem(item, this::carregarItens);
+
+                Scene cenaDeAlterar = new Scene(root);
+                Stage telaDeAlterar = new Stage();
+                telaDeAlterar.getIcons().add(new Image("images/btnAlterar.png"));
+                telaDeAlterar.setTitle("Alterar Quantidade");
+                telaDeAlterar.setScene(cenaDeAlterar);
+                telaDeAlterar.show();
+            });
+        }
+	
+}
+    
+    @FXML
+    private void chamarTelaDeRemover(Item item) {
+    	  // Código para abrir a tela de remoção
+        Platform.runLater(() -> {
+            FxWeaver fxWeaver = context.getBean(FxWeaver.class);
+            Parent root = fxWeaver.loadView(RemoveScreenController.class); // Ou a tela de remoção
+
+            RemoveScreenController removeScreenController = fxWeaver.getBean(RemoveScreenController.class);
+            removeScreenController.receberItem(item, this::carregarItens); // Passa o item para o controller de remoção
+
+            Scene cenaDeRemover = new Scene(root);
+            Stage telaDeRemover = new Stage();
+            telaDeRemover.getIcons().add(new Image("images/btnRemover.png"));
+            telaDeRemover.setTitle("Remover Quantidade");
+            telaDeRemover.setScene(cenaDeRemover);
+            telaDeRemover.show();
+        });
+    }
+        @FXML
+        private void chamarTelaDeAdicionar(Item item) {
+            // Obter o item selecionado na TableView
+
+            if (item != null) {  
+
+            	Platform.runLater(() -> {
+                    FxWeaver fxWeaver = context.getBean(FxWeaver.class);
+                    Parent root = fxWeaver.loadView(AddScreenController.class);
+
+                    AddScreenController addScreenController = fxWeaver.getBean(AddScreenController.class);
+                    addScreenController.receberItem(item, this::carregarItens);
+
+                    Scene cenaDeAdicionar = new Scene(root);
+                    Stage telaDeAdicionar = new Stage();
+                    telaDeAdicionar.getIcons().add(new Image("images/btnAdicionar.png"));
+                    telaDeAdicionar.setTitle("Adicionar Quantidade");
+                    telaDeAdicionar.setScene(cenaDeAdicionar);
+                    telaDeAdicionar.show();
+                });
+            }
+    	
+    }
+        @FXML
+        private void chamarTelaDeAcessos() {
+            try {
+                LoadScreen.showScreen("Relat\u00f3rio", RelatoryController.class, "relatorio");
+            }
+            catch (final Exception e) {
+                e.printStackTrace();
+            }
+        }
     private List<ImageView> estilizandoBotoes(){
     	Image imagemAlterar = new Image("/images/btnAlterar.png");
     	ImageView viewAlterar = new ImageView(imagemAlterar);
