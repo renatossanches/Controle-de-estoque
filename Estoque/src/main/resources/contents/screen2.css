@@ -1,0 +1,76 @@
+.btn{
+	-fx-cursor: hand!important;  
+	-fx-padding: 1px 1px!important; 
+	-fx-border-radius: 0px!important; 
+	-fx-border-color: transparent!important;
+	-fx-border-width: 0px!important;
+	-fx-background-radius:20px!important; 
+	-fx-pref-width:40px!important;
+	-fx-pref-height:40px!important;
+}
+.btn-alterar {
+    -fx-background-color: #4CAF50;  
+    
+}
+.btn-deletar {
+    -fx-background-color: #E0E0E0;  
+    
+}
+.btn-adicionar {
+    -fx-background-color: #add8e6;  
+    
+}
+.button{
+	-fx-border-radius: 25px;
+	-fx-background-radius:30px; 
+	-fx-border-width: 5px;
+	-fx-cursor: hand; 	
+	-fx-pref-width: 150;
+	-fx-pref-height: 54;
+}
+.button-remover{
+	-fx-border-color: red;
+}
+.button-alterar{
+	-fx-border-color: none;
+}
+.label-itens{
+	-fx-font-size: 24px;
+	-fx-alignment: TOP_LEFT;
+	-fx-font-family: 'Good Timing Rg';
+	
+}
+/* Estilo para tudo que está dentro da tabela */
+.table-view .table-cell {
+    -fx-font-size: 24px;
+    -fx-font-family: 'Good Timing Rg';
+    -fx-background-color: #F8E7F6;     
+    
+}
+
+/* Estilo para o titulo da planilha */
+.colTitle{
+	-fx-font-family: 'Game Over';
+	-fx-alignment: center;
+	-fx-font-size: 70px ;
+	-fx-pref-height: 50px; 
+	-fx-effect: dropshadow(three-pass-box, black, 0.2, 0.1, 0, 0); 
+	-fx-border-color: black;		
+
+}
+.colMensagem {
+    -fx-wrap-text: true!important; /* Quebra o texto */
+    -fx-text-alignment: justify; /* Para justificar o texto */
+}
+/* Estilo para o lado de fora da planilha */
+.table-view-style{
+	-fx-border-color: black;
+	-fx-effect: dropshadow(three-pass-box, black, 5, 0.5, 0, 0); 
+
+}
+.table-view .table-cell {
+    -fx-min-height: 40px;
+}
+.txtForm{
+	-fx-background-color: transparent;
+}
