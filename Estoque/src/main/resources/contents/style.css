@@ -1,0 +1,169 @@
+.AnchorPane {
+    -fx-background-image: url("../images/background.jpg");
+    -fx-background-size: cover;  /* Faz a imagem cobrir toda a área */
+    -fx-background-position: center center;  /* Centraliza a imagem */
+    -fx-background-repeat: no-repeat;   
+    -fx-background-size: stretch;
+    -fx-effect: dropshadow(three-pass-box, black, 5, 0.5, 0, 0); 
+    
+    }
+.label-form{
+	-fx-font-size: 22.0;
+    -fx-font-family: 'Good Timing Rg';
+}
+
+.label-titulo {
+    -fx-font-family:  'Karmatic Arcade', 'Rockwell Extra Bold', 'Times New Roman';
+    -fx-font-size: 33.0;
+    -fx-text-alignment: center;
+    -fx-font-weight: bolder;
+    -fx-effect: dropshadow(three-pass-box, black, 0.2, 0.1,-2,-2); 
+    
+}
+.label-funcoes{
+	-fx-font-family:  'Unlearned 2 BRK';
+	-fx-font-size: 60.0;	
+	
+}
+.label-itens {
+    -fx-font-family: 'Good Timing Rg';
+    -fx-font-size: 24.0;
+    -fx-line-spacing: 1.0;
+    -fx-text-alignment: justify;
+    -fx-wrap-text: true;
+}
+.label-itens-background {
+   -fx-background-color:#E4F1FF ;
+}
+.label {
+   -fx-cursor: text;
+}
+/* Estilo para o VBox (painel de entrada de dados) */
+.vbox-padding {
+    -fx-padding: 0;
+
+}
+
+/* Estilos dos campos de texto (TextField) */
+.text-field {
+    -fx-font-size: 22.0;
+    -fx-effect: dropshadow(three-pass-box, black, 2, 0.5, 0.5, 0.5); 
+    -fx-font-family: 'Good Timing Rg';
+    -fx-background-color: #F8E7F6; 
+    
+}
+
+
+.text-field-id {
+    -fx-pref-height: 13.0;
+    -fx-pref-width: 214.0;
+}
+
+.text-field-quantidade {
+    -fx-pref-height: 25.0;
+    -fx-pref-width: 6.0;
+}
+.text-field-nome {
+    -fx-pref-height: 25.0;
+    -fx-pref-width: 236.0;
+}
+
+/* Estilo para os botões */
+.button {
+    -fx-font-family: "RETROTECH";
+    -fx-font-size: 20.0;
+    -fx-font-weight: bolder; 
+    -fx-border-radius: 25px;
+    -fx-background-radius:35px; 
+    -fx-border-color: black; 
+    -fx-border-width: 4px;  
+    -fx-text-fill: white;
+    -fx-cursor: hand;  
+    -fx-effect: dropshadow(three-pass-box, black, 2, 0.2, 0, 0); 
+    
+}
+.button-calendar .button{
+	-fx-font-size: 20!important;
+	-fx-effect: none; 
+	-fx-border-radius: 0px;
+	-fx-background-radius:0px; 
+    -fx-border-width: 0px;  
+    -fx-border-color: transparent; 
+    -fx-pref-height: 5px;
+    -fx-pref-width: 5px;
+    }
+.button-dados{
+    -fx-pref-height: 10px!important;
+    -fx-pref-width: 180px!important;
+    }
+.button-dados-visualizar{
+	-fx-background-color: #0077b6!important;
+	-fx-border-color: #241178!important; 
+    -fx-text-fill: #ade8f4!important;
+
+    }
+.button-adicionar {
+    -fx-background-color: black;
+    -fx-border-color: #000000; 
+}
+
+.button-remover {
+-fx-background-color: red;      
+
+}
+
+.button-alterar {
+    -fx-background-color: #ffab07;
+}
+
+/* Estilo para o botão "Listar Todos" */
+.button-listar-todos {
+    -fx-background-color: black;
+    -fx-font-size: 15.0;
+}
+
+/* Estilo para as setas de navegação */
+.button-seta {
+    -fx-border-width: 0;
+    -fx-background-color: transparent;
+    -fx-text-fill: #2e12ffdb;
+    -fx-font-size: 120.0;
+    -fx-effect: dropshadow(three-pass-box, black, 2, 0.5, 0.5, 0.5); 
+    
+}
+
+.button-seta-esquerda {
+    -fx-rotate: 180.0;
+    -fx-padding: -100.0;
+}
+
+.button-seta-direita {
+    -fx-padding: -100.0;
+}
+
+/* Estilo para o Separator */
+.separator {
+    -fx-pref-height: 26.0;
+    -fx-pref-width: 1173.0;
+}
+
+.scroll-pane-style{
+	-fx-background-color: transparent;
+	-fx-border-color: transparent;
+	-fx-background-insets: 0, 0; 
+}
+
+.scroll-pane-style .viewport {
+    -fx-background-color: transparent; 
+}
+
+.scroll-pane-ListarTodos .viewport {
+    -fx-background-color: transparent; 
+	
+}
+.scroll-pane-ListarTodos {
+    -fx-background-color: #F5EFFF; 
+    -fx-effect: dropshadow(three-pass-box, black, 5, 0.5, 0, 0); 
+    -fx-border-color: black;	
+}
+
