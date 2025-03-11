@@ -1,6 +1,6 @@
 O projeto, não fiz etapa por etapa de configuração e criação pois é um projeto privado, estarei compartilhando apenas as informações open sources, as configurações serão diferentes baseados em sua máquina;
 
->>>>>>>>>>>>>>>>>>>>>>>>>FIREBASE WEBSITE - CONFIGURAÇÃO<<<<<<<<<<<<<<<<<<<<<<<<<<
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>FIREBASE WEBSITE - CONFIGURAÇÃO<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 1- Abra o site firebase: https://firebase.google.com/?hl=pt-br crie uma conta
 2- Acesse o console: https://console.firebase.google.com/u/0/?hl=pt-br
@@ -8,27 +8,34 @@ O projeto, não fiz etapa por etapa de configuração e criação pois é um pro
 4- Crie um realtimedatabase com o servidor nos EUA(deixe as regras privadas em false)
 5- Vá em Visão geral do projeto > Configurações do projeto > Contas de serviço > SDK Admin do Firebase > selecione Java> Gerar nova chave privada> renomeie conforme quiser, mas recomendo colocar como adm.json, esse arquivo sera utilizado futuramente.
 
->>>>>>>>>>>>>>>>>>>>>>>>>FIREBASE WEBSITE - CONFIGURAÇÃO<<<<<<<<<<<<<<<<<<<<<<<<<<
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>FIREBASE WEBSITE - CONFIGURAÇÃO<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 1. Vá em Authentication> método de login> Adicionar novo fornecedor > email/senha
 2. Configurações> Domínios autorizados> adicionar Dominio> adicione o dominio conforme a necessidade ex: "@gmail.com"
 3. Usuários>Adicionar Usuário> usuario@dominio.com e a senha;
 
 
->>>>>>>>>>>>>>>>>>>>>>>>>FIREBASE WEBSITE - CONFIGURAÇÃO<<<<<<<<<<<<<<<<<<<<<<<<<<
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>FIREBASE WEBSITE - CONFIGURAÇÃO<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 1. Vá em Authentication> método de login> Adicionar novo fornecedor > email/senha
 2. Configurações> Domínios autorizados> adicionar Dominio> adicione o dominio conforme a necessidade ex: "@gmail.com"
 3. Usuários>Adicionar Usuário> usuario@dominio.com e a senha;
 
 
->>>>>>>>>>>>>>>>>>>>>>>>>FIREBASE WEBSITE - CONFIGURAÇÃO<<<<<<<<<<<<<<<<<<<<<<<<<<
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>FIREBASE WEBSITE - CONFIGURAÇÃO<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 1. Vá em Visão geral do projeto > Configurações do projeto> Geral> Desça ate NPM> copie o apiKey: "";
+
 2. ECLIPSE - TokenAuthentication > cole isso em  FIREBASE_API_URL> key= apiKey;> e também cole em urlStr= apikey;
 
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ECLIPSE - TOKENAUTHENTICATION<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
->>>>>>>>>>>>>>>>>>>>>>>>>ECLIPSE - FIREBASECONFIG<<<<<<<<<<<<<<<<<<<<<<<<<<
+Em TokenAuthentication:
+
+1. na linha de codigo 19 e 20(FIREBASE_API_URL e urlStr), altere com o codigo copiado
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ECLIPSE - FIREBASECONFIG<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 1. mude aqui conforme seu projeto:
         InputStream serviceAccount = new ClassPathResource("aqui troque exatamente pelo nome do arquivo gerado no Firebase com a extensão .json").getInputStream();
@@ -38,7 +45,7 @@ O projeto, não fiz etapa por etapa de configuração e criação pois é um pro
                 .setDatabaseUrl("https://seuBancoDeDados-default-rtdb.firebaseio.com")
                 .build();
 
->>>>>>>>>>>>>>>>>>>>>>>>>ECLIPSE - PROPERTIES<<<<<<<<<<<<<<<<<<<<<<<<<<
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>ECLIPSE - PROPERTIES<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 Em aplication.properties:
 
