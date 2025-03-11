@@ -299,7 +299,7 @@ public class ItemControllerFXML {
 					this.service.remove(id);
 					this.txtNome.setVisible(true);
 					desativarLabels();
-					AlertMsg.mostrarMensagem("Sucesso", "Item removido com sucesso!", false);
+					AlertMsg.mostrarMensagem("Sucesso", "Item removido com sucesso!", true);
 					this.logs.logUserAction("item removido");
 					carregarItens();
 				} else {
