@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#enterPressed" onMouseClicked="#tirarFocus" prefHeight="685.0" prefWidth="1280.0" styleClass="AnchorPane" stylesheets="@../../../contents/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.Estoque.controllerFXML.ItemControllerFXML">
+	<children>
+      <StackPane AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
+         <children>
+      		<Label alignment="CENTER" prefHeight="46.0" prefWidth="477.0" styleClass="label-titulo" text="Sistema de Estoque" textAlignment="CENTER" />
+         </children>
+      </StackPane>
+        <HBox alignment="CENTER" layoutX="2.0" layoutY="271.2" prefHeight="52.0" prefWidth="1330.0" spacing="20.0" AnchorPane.leftAnchor="-48.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="271.0">
+			<children>
+				<Button id="btnAdicionar" fx:id="btnAdicionar" graphicTextGap="0.0" mnemonicParsing="false" onAction="#adicionarItem" prefHeight="38.0" prefWidth="154.0" styleClass="button-adicionar" text="ADICIONAR">
+               <font>
+                  <Font name="Bodoni MT Poster Compressed" size="13.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+				<Button id="btnAlterar" fx:id="btnAlterar" mnemonicParsing="false" onAction="#alterarItem" prefHeight="38.0" prefWidth="154.0" styleClass="button-alterar" text="ALTERAR">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button id="btnRemover" fx:id="btnRemover" mnemonicParsing="false" onAction="#removerItem" prefHeight="38.0" prefWidth="154.0" text="REMOVER">
+               <styleClass>
+                  <String fx:value="button-remover" />
+                  <String fx:value="button" />
+               </styleClass>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+			</children>
+		</HBox>
+<HBox layoutX="-14.0" layoutY="120.0" onMouseClicked="#voltarFocus" prefHeight="90.0" prefWidth="1280.0" AnchorPane.bottomAnchor="475.19999999999993" AnchorPane.leftAnchor="-14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="120.0">
+    <children>
+        <Button fx:id="btnSetaEsquerda" mnemonicParsing="false" onAction="#moverEsquerda" onKeyPressed="#moverEsquerdaPressed" prefHeight="82.0" prefWidth="122.0" text="➤" HBox.hgrow="ALWAYS">
+            <styleClass>
+                <String fx:value="button-seta-esquerda" />
+                <String fx:value="button-seta" />
+            </styleClass>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+            <HBox.margin>
+                <Insets left="50.0" />
+            </HBox.margin>
+        </Button>
+            <Region disable="true" prefHeight="64.0" prefWidth="587.0" HBox.hgrow="ALWAYS" />
+              <Button fx:id="btnSetaDireita" mnemonicParsing="false" onAction="#moverDireita" onKeyPressed="#moverDireitaPressed" prefHeight="82.0" prefWidth="121.0" text="➤" HBox.hgrow="ALWAYS">
+            <styleClass>
+                <String fx:value="button-seta-direita" />
+                <String fx:value="button-seta" />
+            </styleClass>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+            <HBox.margin>
+                <Insets right="250.0" />
+            </HBox.margin>
+        </Button>
+    </children>
+    <padding>
+        <Insets left="150.0" />
+    </padding>
+</HBox>
+
+
+      <AnchorPane layoutX="14.0" layoutY="756.0" AnchorPane.leftAnchor="20" AnchorPane.topAnchor="20">
+         <children>
+            <Button fx:id="screen2" layoutX="-1.0" mnemonicParsing="false" onAction="#chamarSegundaTela" styleClass="button-adicionar" text="VISUALIZAR EM TABELA">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="14.0" layoutY="348.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="350.0">
+         <children>
+      		<Button id="btnAll" fx:id="btnAll" layoutY="6.0" mnemonicParsing="false" onAction="#ListarTodosOsItens" styleClass="button-listar-todos" text="LISTAR TODOS">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </AnchorPane>
+		<Separator layoutY="328.0" prefHeight="26.0" prefWidth="1400.0" styleClass="separator" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+<ScrollPane hbarPolicy="AS_NEEDED" layoutX="170.4" layoutY="350.4" prefHeight="313.0" prefWidth="1075.0" styleClass="scroll-pane-ListarTodos" vbarPolicy="AS_NEEDED" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="350.0">
+    <content>
+        <Label fx:id="allItens" alignment="TOP_LEFT" lineSpacing="1.0" textAlignment="JUSTIFY" wrapText="true">
+               <styleClass>
+                  <String fx:value="label-itens" />
+                  <String fx:value="label-itens-background" />
+               </styleClass></Label>
+    </content>
+</ScrollPane>
+      <VBox fx:id="vboxItens" alignment="TOP_CENTER" layoutX="1035.2" layoutY="3.2" prefHeight="686.0" prefWidth="244.0" spacing="30.0" styleClass="vbox-padding" AnchorPane.bottomAnchor="-0.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label alignment="TOP_RIGHT" contentDisplay="CENTER" prefHeight="88.0" prefWidth="237.0" text="Funções">
+               <styleClass>
+                  <String fx:value="label-funcoes" />
+                  <String fx:value="label-titulo" />
+               </styleClass>
+               <VBox.margin>
+                  <Insets bottom="-30.0" />
+               </VBox.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+				<Button id="btnRemover" fx:id="btnClickRemover" mnemonicParsing="false" onAction="#clickRemover" onKeyPressed="#enterPressed" prefHeight="38.0" prefWidth="149.0" text="REMOVER" VBox.vgrow="ALWAYS">
+               <styleClass>
+                  <String fx:value="button-remover" />
+                  <String fx:value="button" />
+               </styleClass>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button id="btnAlterar" fx:id="btnClickAlterar" mnemonicParsing="false" onAction="#clickAlterar" onKeyPressed="#enterPressed" prefHeight="38.0" prefWidth="154.0" styleClass="button-alterar" text="ALTERAR" VBox.vgrow="ALWAYS">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button id="btnAdicionar" fx:id="btnClickAdicionar" graphicTextGap="0.0" mnemonicParsing="false" onAction="#clickAdicionar" onKeyPressed="#enterPressed" prefHeight="38.0" prefWidth="154.0" styleClass="button-adicionar" text="ADICIONAR" VBox.vgrow="ALWAYS">
+               <font>
+                  <Font name="Bodoni MT Poster Compressed" size="13.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </VBox>
+          <VBox fx:id="vboxTxtFields" layoutX="367.0" layoutY="75.0" prefHeight="182.0" prefWidth="498.0" spacing="20.0" styleClass="vbox-padding" AnchorPane.leftAnchor="367.20000000000005" AnchorPane.rightAnchor="414.6" AnchorPane.topAnchor="75.0">
+         <children>
+            <StackPane prefHeight="150.0" prefWidth="200.0">
+               <children>
+                  <ScrollPane fx:id="SPIdAttTela" hbarPolicy="AS_NEEDED" prefHeight="49.0" prefWidth="498.0" styleClass="scroll-pane-style" vbarPolicy="NEVER" visible="false">
+                     <content>
+                        <Label fx:id="labelIdAttTela" styleClass="label-form">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </Label>
+                     </content>
+                  </ScrollPane>
+      				<TextField id="txtId" fx:id="txtId" focusTraversable="false" onKeyPressed="#enterPressed" onKeyReleased="#buscarPorId" onMouseClicked="#voltarFocus" promptText="ID do Item">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                     <styleClass>
+                        <String fx:value="text-field text-field-id" />
+                        <String fx:value="txt" />
+                     </styleClass>
+                  </TextField>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0">
+               <children>
+                  <ScrollPane fx:id="SPNomeAttTela" hbarPolicy="AS_NEEDED" prefHeight="49.0" prefWidth="498.0" styleClass="scroll-pane-style" vbarPolicy="NEVER" visible="false">
+                     <content>
+                        <Label fx:id="labelNomeAttTela" styleClass="label-form">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </Label>
+                     </content>
+                  </ScrollPane>
+      				<TextField id="txtNome" fx:id="txtNome" focusTraversable="false" onKeyPressed="#enterPressed" onMouseClicked="#voltarFocus" promptText="Nome" styleClass="text-field text-field-nome">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextField>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0">
+               <children>
+                  <ScrollPane fx:id="SPQuantidadeAttTela" hbarPolicy="AS_NEEDED" prefHeight="49.0" prefWidth="498.0" styleClass="scroll-pane-style" vbarPolicy="NEVER" visible="false">
+                     <content>
+                        <Label fx:id="labelQuantidadeAttTela" styleClass="label-form">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
+                        </Label>
+                     </content>
+                  </ScrollPane>
+            				<TextField id="txtQuantidade" fx:id="txtQuantidade" focusTraversable="false" onKeyPressed="#enterPressed" onMouseClicked="#voltarFocus" promptText="Quantidade do item" styleClass="text-field text-field-quantidade">
+                     <cursor>
+                        <Cursor fx:constant="TEXT" />
+                     </cursor>
+                  </TextField>
+               </children>
+            </StackPane>
+         </children>
+		</VBox>
+      <Button fx:id="btnLogOff" layoutX="24.0" layoutY="94.0" mnemonicParsing="false" onAction="#logOff" prefHeight="51.0" prefWidth="107.0" styleClass="button-remover" text="LogOff" visible="false" />
+
+	</children>
+</AnchorPane>
