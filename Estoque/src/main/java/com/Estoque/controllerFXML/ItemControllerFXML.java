@@ -330,34 +330,34 @@ public class ItemControllerFXML {
 			try {
 				if (TokenAuthentication.isUserLoggedIn()) {
 
-					Item itemEquals = this.itens.get(this.currentIndex);
-
-					Long id = Long.valueOf(Long.parseLong(this.txtId.getText()));
-					String nome = this.txtNome.getText();
-					int quantidade = Integer.parseInt(this.txtQuantidade.getText());
+					Item itemEquals = itens.get(currentIndex);
+					System.out.println(currentIndex);
+					Long id = Long.valueOf(Long.parseLong(txtId.getText()));
+					String nome = txtNome.getText();
+					int quantidade = Integer.parseInt(txtQuantidade.getText());
 					Item item = new Item(id, nome, Integer.valueOf(quantidade));
-					this.service.alterItem(item);
-					this.txtId.setVisible(true);
+					service.alterItem(item);
+					txtId.setVisible(true);
 					desativarLabels();
 					AlertMsg.mostrarMensagem("Sucesso", "Item alterado com sucesso!", true);
-					if (!itemEquals.getQuantidade()
-							.equals(Integer.valueOf(Integer.parseInt(this.txtQuantidade.getText())))
-							&& !itemEquals.getNome().equals(this.txtNome.getText())) {
-						this.logs.logUserAction(
-								"Nome alterado de: " + itemEquals.getNome() + " para: " + this.txtNome.getText()
+					if (!(itemEquals.getQuantidade().equals(quantidade))
+							&& !(itemEquals.getNome().equals(nome))) {
+						logs.logUserAction(
+								"Nome alterado de: " + itemEquals.getNome() + " para: " + nome
 										+ "\n\n e Quantidade alterada de: " + String.valueOf(itemEquals.getQuantidade())
-										+ " para: " + this.txtQuantidade.getText());
-					} else if (!itemEquals.getQuantidade()
-							.equals(Integer.valueOf(Integer.parseInt(this.txtQuantidade.getText())))) {
-						this.logs.logUserAction("Quantidade alterada de: " + itemEquals.getQuantidade().toString()
-								+ " para: " + this.txtQuantidade.getText());
-					} else if (!itemEquals.getNome().endsWith(this.txtNome.getText())) {
-						this.logs.logUserAction(
-								"Nome alterado de: " + itemEquals.getNome() + " para: " + this.txtNome.getText());
+										+ " para: " + quantidade);
+					}
+					
+					else if (!itemEquals.getQuantidade().equals(quantidade)) {
+						logs.logUserAction("Quantidade alterada de: " + itemEquals.getQuantidade().toString()
+								+ " para: " + quantidade);
+					}
+					else if (!itemEquals.getNome().equals(nome)) {
+						logs.logUserAction(
+								"Nome alterado de: " + itemEquals.getNome() + " para: " + nome);
 					}
 					carregarItens();
 				} else {
-
 					AlertMsg.mostrarMensagem("Erro",
 							"Erro ao adicionar item, Você precisa estar logado para completar essa ação", false);
 					LoadScreen.showScreen("Login", LoginController.class, "login");
