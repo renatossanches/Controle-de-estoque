@@ -22,7 +22,7 @@ import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
 
 @Component
-@FxmlView("/com/Estoque/gui/alterScreen.fxml")
+@FxmlView("/com/Estoque/gui/AlterScreen.fxml")
 public class AlterScreenController
 {
     @Autowired
@@ -32,13 +32,13 @@ public class AlterScreenController
     private LogsRepository logs;
     
     @FXML
-    private TextField txtQuantidade;
+    private TextField txtQuantity;
     
     @FXML
-    private TextField txtNome;
+    private TextField txtName;
     
     @FXML
-    private Button btnAlterar;
+    private Button btnAlter;
     
     @FXML
     private Label labelItem;
@@ -46,9 +46,9 @@ public class AlterScreenController
     private Runnable onCloseCallback;
     
     public AlterScreenController() {
-        this.txtQuantidade = new TextField();
-        this.txtNome = new TextField();
-        this.labelItem = new Label();
+    	txtQuantity = new TextField();
+        txtName = new TextField();
+        labelItem = new Label();
     }
     
     @FXML
@@ -56,60 +56,61 @@ public class AlterScreenController
     }
     
     @FXML
-    private void enterPressed(final KeyEvent event) {
+    private void enterPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
             event.consume();
-            if (this.btnAlterar.isVisible()) {
-                this.alterar();
+            if (btnAlter.isVisible()) {
+                alter();
             }
         }
     }
     
     @FXML
-    private void alterar() {
+    private void alter() {
         try {
             if (TokenAuthentication.isUserLoggedIn()) {
-                this.item.setQuantidade(Integer.valueOf(Integer.parseInt(this.txtQuantidade.getText())));
-                this.item.setNome(this.txtNome.getText());
-                this.service.alterItem(this.item);
-                AlertMsg.mostrarMensagem("Sucesso", "Item alterado com sucesso", true);
-                if (!this.item.getQuantidade().equals(Integer.parseInt(this.txtQuantidade.getText())) && !this.item.getNome().equals(this.txtNome.getText())) {
-                    this.logs.logUserAction("Nome alterado de: " + this.item.getNome() + " para: " + this.txtNome.getText() + "\n\n e Quantidade alterada de: " + String.valueOf(this.item.getQuantidade()) + " para: " + this.txtQuantidade.getText());
+                item.setQuantity(Integer.valueOf(Integer.parseInt(txtQuantity.getText())));
+                item.setName(txtName.getText());
+                service.alterItem(item);
+                AlertMsg.showMessage("Sucesso", "Item alterado com sucesso", true);
+                if (!item.getQuantity().equals(Integer.parseInt(txtQuantity.getText())) && !item.getName().equals(txtName.getText())) {
+                    logs.logUserAction("Nome alterado de: " + item.getName() + " para: " + txtName.getText() + "\n\n e Quantidade alterada de: " + String.valueOf(item.getQuantity()) + " para: " + txtQuantity.getText());
                 }
-                else if (!this.item.getQuantidade().equals(Integer.parseInt(this.txtQuantidade.getText()))) {
-                    this.logs.logUserAction("Quantidade alterada de: " + this.item.getQuantidade().toString() + " para: " + this.txtQuantidade.getText());
+                else if (!item.getQuantity().equals(Integer.parseInt(txtQuantity.getText()))) {
+                    logs.logUserAction("Quantidade alterada de: " + item.getQuantity().toString() + " para: " + txtQuantity.getText());
                 }
-                else if (!this.item.getNome().equals(this.txtNome.getText())) {
-                    this.logs.logUserAction("Nome alterado de: " + this.item.getNome() + " para: " + this.txtNome.getText());
+                else if (!item.getName().equals(txtName.getText())) {
+                    logs.logUserAction("Nome alterado de: " + item.getName() + " para: " + txtName.getText());
                 }
-                if (this.onCloseCallback != null) {
-                    this.onCloseCallback.run();
+                if (onCloseCallback != null) {
+                    onCloseCallback.run();
                 }
-                this.fecharTela();
+                closeScreen();
             }
             else {
-                AlertMsg.mostrarMensagem("Erro", "Erro ao adcionar a quantidade, Voc\u00ea precisa estar logado para completar essa a\u00e7\u00e3o", false);
+                AlertMsg.showMessage("Erro", "Erro ao adicionar a quantidade, Você precisa estar logado para completar essa ação", false);
                 LoadScreen.showScreen("Login", LoginController.class, "login");
-                final Stage stage = (Stage)this.btnAlterar.getScene().getWindow();
+                Stage stage = (Stage)btnAlter.getScene().getWindow();
                 stage.close();
             }
-        }
-        catch (final Exception e) {
-            AlertMsg.mostrarMensagem("Erro", "Todos os campos devem ser preenchidos", false);
+    	}
+        catch (Exception e) {
+            AlertMsg.showMessage("Erro", "Todos os campos devem ser preenchidos", false);
             e.printStackTrace();
         }
     }
-    
-    private void fecharTela() {
-        final Stage stage = (Stage)this.btnAlterar.getScene().getWindow();
+
+
+    private void closeScreen() {
+        Stage stage = (Stage)btnAlter.getScene().getWindow();
         stage.close();
     }
     
-    public void receberItem(final Item item, final Runnable onCloseCallback) {
+    public void receiveItem(Item item, Runnable onCloseCallback) {
         this.item = item;
         this.onCloseCallback = onCloseCallback;
         this.labelItem.setText(item.toString());
-        this.txtNome.setText(item.getNome());
-        this.txtQuantidade.setText(String.valueOf(item.getQuantidade()));
+        this.txtName.setText(item.getName());
+        this.txtQuantity.setText(String.valueOf(item.getQuantity()));
     }
 }

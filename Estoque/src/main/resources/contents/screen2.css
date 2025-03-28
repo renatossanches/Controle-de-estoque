@@ -8,15 +8,15 @@
 	-fx-pref-width:40px!important;
 	-fx-pref-height:40px!important;
 }
-.btn-alterar {
+.btn-alter {
     -fx-background-color: #4CAF50;  
     
 }
-.btn-deletar {
+.btn-delete {
     -fx-background-color: #E0E0E0;  
     
 }
-.btn-adicionar {
+.btn-add {
     -fx-background-color: #add8e6;  
     
 }
@@ -28,13 +28,13 @@
 	-fx-pref-width: 150;
 	-fx-pref-height: 54;
 }
-.button-remover{
+.button-remove{
 	-fx-border-color: red;
 }
-.button-alterar{
+.button-alter{
 	-fx-border-color: none;
 }
-.label-itens{
+.label-items{
 	-fx-font-size: 24px;
 	-fx-alignment: TOP_LEFT;
 	-fx-font-family: 'Good Timing Rg';
@@ -58,7 +58,7 @@
 	-fx-border-color: black;		
 
 }
-.colMensagem {
+.colMessage{
     -fx-wrap-text: true!important; /* Quebra o texto */
     -fx-text-alignment: justify; /* Para justificar o texto */
 }

@@ -9,7 +9,7 @@
 
 <AnchorPane onKeyPressed="#enterPressed" prefHeight="485.0" prefWidth="663.0" styleClass="AnchorPane" stylesheets="@../../../contents/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.Estoque.controllerFXML.LoginController">
    <children>
-      <Label alignment="CENTER" layoutY="28.0" prefHeight="55.0" prefWidth="532.0" styleClass="label-titulo" text="Login" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0" />
+      <Label alignment="CENTER" layoutY="28.0" prefHeight="55.0" prefWidth="532.0" styleClass="label-title" text="Login" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0" />
       <HBox layoutX="36.0" layoutY="116.0" prefHeight="138.0" prefWidth="478.0" AnchorPane.leftAnchor="36.0" AnchorPane.rightAnchor="18.0">
          <children>
             <VBox prefHeight="198.0" prefWidth="79.0" spacing="30.0" HBox.hgrow="SOMETIMES">
@@ -21,11 +21,11 @@
             <VBox prefHeight="138.0" prefWidth="377.0" spacing="30.0" HBox.hgrow="ALWAYS">
                <children>
                   <TextField fx:id="txtEmail" onKeyPressed="#enterPressed" prefHeight="46.0" prefWidth="336.0" promptText="Digite seu email:" />
-                  <TextField fx:id="txtSenha" onKeyPressed="#enterPressed" prefHeight="46.0" prefWidth="336.0" promptText="Digite sua senha:" />
+                  <TextField fx:id="txtPassword" onKeyPressed="#enterPressed" prefHeight="46.0" prefWidth="336.0" promptText="Digite sua senha:" />
                </children>
             </VBox>
          </children>
       </HBox>
-      <Button fx:id="btnEnviar" layoutX="260.0" layoutY="262.0" mnemonicParsing="false" onAction="#enviarLogin" prefHeight="52.0" prefWidth="191.0" styleClass="button-adicionar" text="Enviar" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="212.0" />
+      <Button fx:id="btnSubmit" layoutX="260.0" layoutY="262.0" mnemonicParsing="false" onAction="#submitLogin" prefHeight="52.0" prefWidth="191.0" styleClass="button-add" text="Enviar" AnchorPane.leftAnchor="260.0" AnchorPane.rightAnchor="212.0" />
    </children>
 </AnchorPane>

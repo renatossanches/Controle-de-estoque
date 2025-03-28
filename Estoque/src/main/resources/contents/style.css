@@ -12,7 +12,7 @@
     -fx-font-family: 'Good Timing Rg';
 }
 
-.label-titulo {
+.label-title {
     -fx-font-family:  'Karmatic Arcade', 'Rockwell Extra Bold', 'Times New Roman';
     -fx-font-size: 33.0;
     -fx-text-alignment: center;
@@ -20,19 +20,19 @@
     -fx-effect: dropshadow(three-pass-box, black, 0.2, 0.1,-2,-2); 
     
 }
-.label-funcoes{
+.label-functions{
 	-fx-font-family:  'Unlearned 2 BRK';
 	-fx-font-size: 60.0;	
 	
 }
-.label-itens {
+.label-items {
     -fx-font-family: 'Good Timing Rg';
     -fx-font-size: 24.0;
     -fx-line-spacing: 1.0;
     -fx-text-alignment: justify;
     -fx-wrap-text: true;
 }
-.label-itens-background {
+.label-items-background {
    -fx-background-color:#E4F1FF ;
 }
 .label {
@@ -59,11 +59,11 @@
     -fx-pref-width: 214.0;
 }
 
-.text-field-quantidade {
+.text-field-quantity {
     -fx-pref-height: 25.0;
     -fx-pref-width: 6.0;
 }
-.text-field-nome {
+.text-field-name {
     -fx-pref-height: 25.0;
     -fx-pref-width: 236.0;
 }
@@ -92,38 +92,38 @@
     -fx-pref-height: 5px;
     -fx-pref-width: 5px;
     }
-.button-dados{
+.button-data{
     -fx-pref-height: 10px!important;
     -fx-pref-width: 180px!important;
     }
-.button-dados-visualizar{
+.button-data-visualize{
 	-fx-background-color: #0077b6!important;
 	-fx-border-color: #241178!important; 
     -fx-text-fill: #ade8f4!important;
 
     }
-.button-adicionar {
+.button-add {
     -fx-background-color: black;
     -fx-border-color: #000000; 
 }
 
-.button-remover {
+.button-remove {
 -fx-background-color: red;      
 
 }
 
-.button-alterar {
+.button-alter {
     -fx-background-color: #ffab07;
 }
 
 /* Estilo para o botão "Listar Todos" */
-.button-listar-todos {
+.button-list-all {
     -fx-background-color: black;
     -fx-font-size: 15.0;
 }
 
 /* Estilo para as setas de navegação */
-.button-seta {
+.button-arrow {
     -fx-border-width: 0;
     -fx-background-color: transparent;
     -fx-text-fill: #2e12ffdb;
@@ -132,12 +132,12 @@
     
 }
 
-.button-seta-esquerda {
+.button-arrow-left {
     -fx-rotate: 180.0;
     -fx-padding: -100.0;
 }
 
-.button-seta-direita {
+.button-arrow-right {
     -fx-padding: -100.0;
 }
 
@@ -157,11 +157,11 @@
     -fx-background-color: transparent; 
 }
 
-.scroll-pane-ListarTodos .viewport {
+.scroll-pane-listAll .viewport {
     -fx-background-color: transparent; 
 	
 }
-.scroll-pane-ListarTodos {
+.scroll-pane-listAll {
     -fx-background-color: #F5EFFF; 
     -fx-effect: dropshadow(three-pass-box, black, 5, 0.5, 0, 0); 
     -fx-border-color: black;	

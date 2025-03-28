@@ -9,14 +9,14 @@
 
 <AnchorPane prefHeight="586.0" prefWidth="1166.0" styleClass="AnchorPane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.Estoque.controllerFXML.RelatoryControllerData">
    <children>
-      <Label alignment="CENTER" contentDisplay="BOTTOM" layoutY="25.0" prefHeight="50.0" prefWidth="476.0" styleClass="label-titulo" text="Dados" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0" />
+      <Label alignment="CENTER" contentDisplay="BOTTOM" layoutY="25.0" prefHeight="50.0" prefWidth="476.0" styleClass="label-title" text="Dados" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0" />
       <TableView fx:id="tableView" layoutX="26.0" layoutY="99.0" prefHeight="443.0" prefWidth="1110.0" styleClass="table-view-style" AnchorPane.bottomAnchor="43.60000000000002" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="29.199999999999818" AnchorPane.topAnchor="99.0">
          <columns>
-            <TableColumn id="colData" fx:id="colData" editable="false" minWidth="0.0" prefWidth="272.79999923706055" styleClass="colTitle" text="Data/Hora" />
+            <TableColumn id="colDate" fx:id="colDate" editable="false" minWidth="0.0" prefWidth="272.79999923706055" styleClass="colTitle" text="Data/Hora" />
             <TableColumn id="colEmail" fx:id="colEmail" editable="false" prefWidth="405.60009765625" styleClass="colTitle" text="Email" />
-            <TableColumn id="Mensagem" fx:id="colMensagem" editable="false" minWidth="-1.0" prefWidth="424.79986572265625" text="Mensagem">
+            <TableColumn id="colMessage" fx:id="colMessage" editable="false" minWidth="-1.0" prefWidth="424.79986572265625" text="Mensagem">
                <styleClass>
-                  <String fx:value="colMensagem" />
+                  <String fx:value="colMessage" />
                   <String fx:value="colTitle" />
                </styleClass></TableColumn>
          </columns>

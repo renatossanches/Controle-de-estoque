@@ -1,7 +1,3 @@
-// 
-// Decompiled by Procyon v0.6.0
-// 
-
 package com.Estoque;
 
 import java.util.Map;
@@ -32,7 +28,7 @@ public class EstoqueApp extends Application
     }
     
     public void start(Stage stage) throws RuntimeException {
-        LoadFonts.todasAsFontes();
+        LoadFonts.allFonts();
         if (TokenAuthentication.isUserLoggedIn()) {
             LoadScreen.showScreen("Controle de Estoque", ItemControllerFXML.class, stage, "ico");
         }

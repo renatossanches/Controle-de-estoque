@@ -32,7 +32,7 @@ public class EstoqueRepository {
     // Buscar todos os itens de forma síncrona
     public CompletableFuture<List<Item>> findAll() {
         CompletableFuture<List<Item>> future = new CompletableFuture<>();
-        List<Item> itemList = new ArrayList<>();
+        List<Item> listItem = new ArrayList<>();
         
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -48,13 +48,13 @@ public class EstoqueRepository {
             	                item.setFirebaseId(snapshot.getKey());  // Atribui a chave única ao firebaseId
             	                
             	                // Adiciona o item na lista
-            	                itemList.add(item);
+            	                listItem.add(item);
             	            }
             	        }
             	        // Completa o futuro com a lista de itens
-            	        future.complete(itemList);  
+            	        future.complete(listItem);  
             	    } else {
-            	        future.complete(itemList);  // Completa com uma lista vazia, se nenhum dado foi encontrado
+            	        future.complete(listItem);  // Completa com uma lista vazia, se nenhum dado foi encontrado
             	    }
             	}
             @Override
@@ -67,7 +67,7 @@ public class EstoqueRepository {
 
     // Buscar um item pelo ID de forma síncrona
     public CompletableFuture<Item> findByIdFirebase(String string) {
-        final Item[] item = new Item[1];
+        Item[] item = new Item[1];
         CompletableFuture<Item> future = new CompletableFuture<>();
 
         databaseReference.child(String.valueOf(string)).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -118,7 +118,6 @@ public class EstoqueRepository {
     
     public CompletableFuture<Long> getMaxId() {
         CompletableFuture<Long> future = new CompletableFuture<>();
-        List<Item> itemList = new ArrayList<>();
         
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

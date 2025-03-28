@@ -2,7 +2,6 @@ package com.Estoque.repositories;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -14,7 +13,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.Estoque.api.AlertMsg;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseToken;
 import com.google.firebase.auth.UserRecord;
@@ -27,7 +25,6 @@ import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
-import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
@@ -48,11 +45,11 @@ public class LogsRepository {
 		this.databaseReference = firebaseDatabase.getReference("logs");
 	}
     
-    public void logUserAction(String mensagem) throws Exception {
-        LocalDateTime dataHora = java.time.LocalDateTime.now();
-        Map<String, String> tokens = TokenAuthentication.carregarToken();
+    public void logUserAction(String message) throws Exception {
+        LocalDateTime dateAndHour = java.time.LocalDateTime.now();
+        Map<String, String> tokens = TokenAuthentication.loadToken();
         String idToken = tokens.get("authToken");
-        String logKey = dataHora.format(dtf2);
+        String logKey = dateAndHour.format(dtf2);
 
         // Verifique se o token é válido
         if (idToken == null || idToken.isEmpty()) {
@@ -68,8 +65,8 @@ public class LogsRepository {
         
         Map<String, Object> logData = new HashMap<>();
         logData.put("email", email);
-        logData.put("dataHora", dataHora.format(dtf));
-        logData.put("mensagem", mensagem);
+        logData.put("dataHora", dateAndHour.format(dtf));
+        logData.put("mensagem", message);
         
         // Salvar log no Firebase
         databaseReference.child("datas").child(logKey).setValueAsync(logData);
@@ -186,13 +183,13 @@ public class LogsRepository {
             PdfWriter.getInstance(document, byteArrayOutputStream);
             document.open();
             BaseFont baseFont = BaseFont.createFont("Times-Roman", BaseFont.WINANSI, BaseFont.EMBEDDED);
-            Font fontTitulo = new Font(baseFont, 30, Font.BOLD, BaseColor.BLACK);
-            Paragraph titulo = new Paragraph("Logs de Ações dos Usuários", fontTitulo);
-            titulo.setAlignment(Element.ALIGN_CENTER);
-            titulo.setSpacingBefore(20f); 
-            titulo.setSpacingAfter(40f);  
+            Font fontTitle = new Font(baseFont, 30, Font.BOLD, BaseColor.BLACK);
+            Paragraph title = new Paragraph("Logs de Ações dos Usuários", fontTitle);
+            title.setAlignment(Element.ALIGN_CENTER);
+            title.setSpacingBefore(20f); 
+            title.setSpacingAfter(40f);  
 
-            document.add(titulo);
+            document.add(title);
             document.setPageSize(PageSize.A4);
 
             // Criar uma tabela com 3 colunas (Email, Data/Hora, Mensagem)
@@ -206,12 +203,12 @@ public class LogsRepository {
             // Adicionar os dados dos logs à tabela
             for (Map<String, Object> log : logs) {
                 String email = (log.get("email") != null) ? log.get("email").toString() : "Não informado";
-                String dataHora = (log.get("dataHora") != null) ? log.get("dataHora").toString() : "Não informado";
-                String mensagem = (log.get("mensagem") != null) ? log.get("mensagem").toString() : "Não informada";
+                String dateAndHour = (log.get("dataHora") != null) ? log.get("dataHora").toString() : "Não informado";
+                String message = (log.get("mensagem") != null) ? log.get("mensagem").toString() : "Não informada";
 
                 table.addCell(createCell(email, 13, Font.NORMAL));
-                table.addCell(createCell(dataHora, 13, Font.NORMAL));
-                table.addCell(createCell(mensagem, 13, Font.NORMAL));
+                table.addCell(createCell(dateAndHour, 13, Font.NORMAL));
+                table.addCell(createCell(message, 13, Font.NORMAL));
             }
 
             // Adicionar a tabela ao documento

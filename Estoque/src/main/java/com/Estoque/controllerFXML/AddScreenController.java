@@ -23,7 +23,7 @@ import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
 
 @Component
-@FxmlView("/com/Estoque/gui/addScreen.fxml")
+@FxmlView("/com/Estoque/gui/AddScreen.fxml")
 public class AddScreenController
 {
     @Autowired
@@ -36,10 +36,10 @@ public class AddScreenController
     private EstoqueService service;
     
     @FXML
-    private TextField txtAdicionar;
+    private TextField txtAdd;
     
     @FXML
-    private Button btnAdicionarQuantidade;
+    private Button btnAddQuantity;
     
     @FXML
     private Label labelItem;
@@ -47,7 +47,7 @@ public class AddScreenController
     private Runnable onCloseCallback;
     
     public AddScreenController() {
-        this.labelItem = new Label();
+        labelItem = new Label();
     }
     
     @FXML
@@ -55,49 +55,49 @@ public class AddScreenController
     }
     
     @FXML
-    private void enterPressed(final KeyEvent event) {
+    private void enterPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
             event.consume();
-            if (this.btnAdicionarQuantidade.isVisible()) {
-                this.adicionar();
+            if (btnAddQuantity.isVisible()) {
+                add();
             }
         }
     }
     
     @FXML
-    private void adicionar() {
+    private void add() {
         try {
             if (TokenAuthentication.isUserLoggedIn()) {
-                final int quantidadeAdicionar = Integer.parseInt(this.txtAdicionar.getText());
-                this.item.setQuantidade(Integer.valueOf(this.item.getQuantidade() + quantidadeAdicionar));
-                this.service.alterItem(this.item);
-                AlertMsg.mostrarMensagem("Sucesso", "Quantidade adicionada com sucesso", true);
-                this.logs.logUserAction("Quantidade adicionada: " + quantidadeAdicionar);
-                if (this.onCloseCallback != null) {
-                    this.onCloseCallback.run();
+                int addQuantity = Integer.parseInt(txtAdd.getText());
+                item.setQuantity(Integer.valueOf(item.getQuantity() + addQuantity));
+                service.alterItem(item);
+                AlertMsg.showMessage("Sucesso", "Quantidade adicionada com sucesso", true);
+                logs.logUserAction("Quantidade adicionada: " + addQuantity);
+                if (onCloseCallback != null) {
+                    onCloseCallback.run();
                 }
-                this.fecharTela();
+                closeScreen();
             }
             else {
-                AlertMsg.mostrarMensagem("Erro", "Erro ao adcionar a quantidade, Voc\u00ea precisa estar logado para completar essa a\u00e7\u00e3o", false);
+                AlertMsg.showMessage("Erro", "Erro ao adcionar a quantidade, Você precisa estar logado para completar essa ação", false);
                 LoadScreen.showScreen("Login", LoginController.class, "login");
-                final Stage stage = (Stage)this.btnAdicionarQuantidade.getScene().getWindow();
+                Stage stage = (Stage)btnAddQuantity.getScene().getWindow();
                 stage.close();
             }
         }
-        catch (final Exception e) {
-            AlertMsg.mostrarMensagem("Erro", "A quantidade deve ser preenchida", false);
+        catch (Exception e) {
+            AlertMsg.showMessage("Erro", "A quantidade deve ser preenchida", false);
         }
     }
     
-    private void fecharTela() {
-        final Stage stage = (Stage)this.btnAdicionarQuantidade.getScene().getWindow();
+    private void closeScreen() {
+        Stage stage = (Stage)btnAddQuantity.getScene().getWindow();
         stage.close();
     }
     
-    public void receberItem(final Item item, final Runnable onCloseCallback) {
+    public void receiveItem(Item item, Runnable onCloseCallback) {
         this.item = item;
         this.onCloseCallback = onCloseCallback;
-        this.labelItem.setText(item.toString());
+        labelItem.setText(item.toString());
     }
 }

@@ -30,7 +30,7 @@ import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxmlView;
 
 @Component
-@FxmlView("/com/Estoque/gui/estoque.fxml")
+@FxmlView("/com/Estoque/gui/ItemEstoque.fxml")
 public class ItemControllerFXML {
 
 	@Autowired
@@ -43,40 +43,40 @@ public class ItemControllerFXML {
 	private EstoqueRepository repository;
 	
 	@FXML
-	private TextField txtNome;
+	private TextField txtName;
 	
 	@FXML
-	private TextField txtQuantidade;
+	private TextField txtQuantity;
 	
 	@FXML
 	private TextField txtId;
 	
 	@FXML
-	private Button btnAdicionar;
+	private Button btnAdd;
 	
 	@FXML
-	private Button btnRemover;
+	private Button btnRemove;
 	
 	@FXML
-	private Button btnClickAdicionar;
+	private Button btnClickAdd;
 	
 	@FXML
-	private Button btnAlterar;
+	private Button btnAlter;
 	
 	@FXML
-	private Button btnClickRemover;
+	private Button btnClickRemove;
 	
 	@FXML
-	private Button btnClickAlterar;
+	private Button btnClickAlter;
 	
 	@FXML
 	private Button btnAll;
 	
 	@FXML
-	private Button btnSetaEsquerda;
+	private Button btnArrowLeft;
 	
 	@FXML
-	private Button btnSetaDireita;
+	private Button btnArrowRight;
 	
 	@FXML
 	private Button screen2;
@@ -85,480 +85,480 @@ public class ItemControllerFXML {
 	private Button btnLogOff;
 	
 	@FXML
-	private Label allItens;
+	private Label allItems;
 	
 	@FXML
-	private Label labelIdAttTela = new Label("");
+	private Label labelIdUpdateScreen = new Label("");
 
 	@FXML
-	private ScrollPane SPIdAttTela;
+	private ScrollPane scrollPaneIdUpdateScreen;
 
 	@FXML
-	private Label labelNomeAttTela = new Label("");
+	private Label labelNameUpdateScreen = new Label("");
 
 	@FXML
-	private ScrollPane SPNomeAttTela;
+	private ScrollPane scrollPaneNameUpdateScreen;
 
 	@FXML
-	private Label labelQuantidadeAttTela = new Label("");
+	private Label labelQuantityUpdateScreen = new Label("");
 
 	@FXML
-	private ScrollPane SPQuantidadeAttTela;
+	private ScrollPane scrollPaneQuantityUpdateScreen;
 
 	@FXML
 	private VBox vboxTxtFields;
 
 	@FXML
-	private Label labelTitulo = new Label("");
+	private Label labelTitle = new Label("");
 
-	private List<Item> itens;
+	private List<Item> items;
 
 	private int currentIndex = 0;
 
-	private String estado = "";
+	private String state = "";
 
-	private Stage stageAberta;
+	private Stage stageOpen;
 
 	@FXML
 	public void initialize() {
-		if (this.stageAberta != null && this.stageAberta.isShowing()) {
+		if (stageOpen != null && stageOpen.isShowing()) {
 			return;
 		}
-		carregarItens();
+		LoadItems();
 		btnLogOff.setVisible(TokenAuthentication.isUserLoggedIn());
-		btnAdicionar.setVisible(false);
-		btnRemover.setVisible(false);
-		btnAlterar.setVisible(false);
-		SPIdAttTela.setVisible(false);
-		SPNomeAttTela.setVisible(false);
-		SPQuantidadeAttTela.setVisible(false);
+		btnAdd.setVisible(false);
+		btnRemove.setVisible(false);
+		btnAlter.setVisible(false);
+		scrollPaneIdUpdateScreen.setVisible(false);
+		scrollPaneNameUpdateScreen.setVisible(false);
+		scrollPaneQuantityUpdateScreen.setVisible(false);
 	}
 
 	@FXML
-	private void clickAdicionar() {
-		if (!btnAdicionar.isVisible()) {
-			estado = "ADICIONAR";
-			attVisible();
-			desativarLabels();
-			btnAdicionar.setVisible(true);
-			btnRemover.setVisible(false);
-			btnAlterar.setVisible(false);
-			btnSetaDireita.setVisible(false);
-			btnSetaEsquerda.setVisible(false);
+	private void clickAdd() {
+		if (!btnAdd.isVisible()) {
+			state = "ADICIONAR";
+			updateVisible();
+			disableLabels();
+			btnAdd.setVisible(true);
+			btnRemove.setVisible(false);
+			btnAlter.setVisible(false);
+			btnArrowRight.setVisible(false);
+			btnArrowLeft.setVisible(false);
 			txtId.setVisible(false);
-			SPIdAttTela.setVisible(true);
-			txtNome.setText("");
-			txtQuantidade.setText("");
+			scrollPaneIdUpdateScreen.setVisible(true);
+			txtName.setText("");
+			txtQuantity.setText("");
 		} else {
-			btnAdicionar.setVisible(false);
-			attDisplay();
+			btnAdd.setVisible(false);
+			updateDisplay();
 		}
 	}
 
 	@FXML
-	private void clickRemover() {
-		if (!btnRemover.isVisible()) {
-			estado = "REMOVER";
-			attVisible();
-			carregarItens();
-			desativarLabels();
-			btnAdicionar.setVisible(false);
-			btnRemover.setVisible(true);
-			btnAlterar.setVisible(false);
-			txtNome.setVisible(false);
-			txtQuantidade.setVisible(false);
-			SPNomeAttTela.setVisible(true);
-			SPQuantidadeAttTela.setVisible(true);
+	private void clickRemove() {
+		if (!btnRemove.isVisible()) {
+			state = "REMOVER";
+			updateVisible();
+			LoadItems();
+			disableLabels();
+			btnAdd.setVisible(false);
+			btnRemove.setVisible(true);
+			btnAlter.setVisible(false);
+			txtName.setVisible(false);
+			txtQuantity.setVisible(false);
+			scrollPaneNameUpdateScreen.setVisible(true);
+			scrollPaneQuantityUpdateScreen.setVisible(true);
 		} else {
-			btnRemover.setVisible(false);
-			attDisplay();
+			btnRemove.setVisible(false);
+			updateDisplay();
 		}
 	}
 
 	@FXML
-	private void clickAlterar() {
-		if (!btnAlterar.isVisible()) {
-			estado = "ALTERAR";
-			attVisible();
-			carregarItens();
-			desativarLabels();
-			btnAdicionar.setVisible(false);
-			btnRemover.setVisible(false);
-			btnAlterar.setVisible(true);
-			SPIdAttTela.setVisible(true);
+	private void clickAlter() {
+		if (!btnAlter.isVisible()) {
+			state = "ALTERAR";
+			updateVisible();
+			LoadItems();
+			disableLabels();
+			btnAdd.setVisible(false);
+			btnRemove.setVisible(false);
+			btnAlter.setVisible(true);
+			scrollPaneIdUpdateScreen.setVisible(true);
 			txtId.setVisible(false);
 		} else {
-			btnAlterar.setVisible(false);
-			attDisplay();
+			btnAlter.setVisible(false);
+			updateDisplay();
 		}
 	}
 
-	private void attVisible() {
-		labelIdAttTela.setText("");
-		labelNomeAttTela.setText("");
-		labelQuantidadeAttTela.setText("");
-		SPIdAttTela.setVisible(false);
-		SPNomeAttTela.setVisible(false);
-		SPQuantidadeAttTela.setVisible(false);
+	private void updateVisible() {
+		labelIdUpdateScreen.setText("");
+		labelNameUpdateScreen.setText("");
+		labelQuantityUpdateScreen.setText("");
+		scrollPaneIdUpdateScreen.setVisible(false);
+		scrollPaneNameUpdateScreen.setVisible(false);
+		scrollPaneQuantityUpdateScreen.setVisible(false);
 		txtId.setVisible(true);
-		txtNome.setVisible(true);
-		txtQuantidade.setVisible(true);
-		btnSetaDireita.setVisible(true);
-		btnSetaEsquerda.setVisible(true);
+		txtName.setVisible(true);
+		txtQuantity.setVisible(true);
+		btnArrowRight.setVisible(true);
+		btnArrowLeft.setVisible(true);
 	}
 
-	private void attDisplay() {
-		if (!(btnAdicionar.isVisible() && btnRemover.isVisible() && btnAlterar.isVisible())) {
-			attVisible();
-			Platform.runLater(() -> carregarItens());
+	private void updateDisplay() {
+		if (!(btnAdd.isVisible() && btnRemove.isVisible() && btnAlter.isVisible())) {
+			updateVisible();
+			Platform.runLater(() -> LoadItems());
 
 		}
 	}
 
-	private void desativarLabels() {
-		SPIdAttTela.setVisible(false);
-		SPNomeAttTela.setVisible(false);
-		SPQuantidadeAttTela.setVisible(false);
+	private void disableLabels() {
+		scrollPaneIdUpdateScreen.setVisible(false);
+		scrollPaneNameUpdateScreen.setVisible(false);
+		scrollPaneQuantityUpdateScreen.setVisible(false);
 	}
 
 	@FXML
-	private void chamarSegundaTela() {
+	private void callSecondScreen() {
 		if (TokenAuthentication.isUserLoggedIn()) {
-			LoadScreen.showScreen("Tabela de Visualização", ViewTableController.class, "planilha");
+			LoadScreen.showScreen("Tabela de Visualização", ViewTableController.class, "spreadsheet");
 		} else {
 
 			try {
-				AlertMsg.mostrarMensagem("Erro",
+				AlertMsg.showMessage("Erro",
 						"Erro ao abrir planilha, Você precisa estar logado para completar essa ação", false);
 				LoadScreen.showScreen("Login", LoginController.class, "login");
-				Stage stage = (Stage) this.screen2.getScene().getWindow();
+				Stage stage = (Stage)screen2.getScene().getWindow();
 				stage.close();
 			} catch (Exception e) {
-				AlertMsg.mostrarMensagem("Erro", "Você precisa estar logado", false);
+				AlertMsg.showMessage("Erro", "Você precisa estar logado", false);
 				e.printStackTrace();
 			}
-			this.btnLogOff.setVisible(TokenAuthentication.isUserLoggedIn());
+			btnLogOff.setVisible(TokenAuthentication.isUserLoggedIn());
 		}
 	}
 
 	@FXML
 	private void logOff() {
-		TokenAuthentication.removerToken();
-		Stage stage = (Stage) this.btnLogOff.getScene().getWindow();
+		TokenAuthentication.removeToken();
+		Stage stage = (Stage) btnLogOff.getScene().getWindow();
 		stage.close();
-		this.btnLogOff.setVisible(false);
+		btnLogOff.setVisible(false);
 	}
 
 	@FXML
-	private void adicionarItem() {
-		if (this.btnAdicionar.isVisible()) {
-			clickAdicionar();
+	private void addItem() {
+		if (btnAdd.isVisible()) {
+			clickAdd();
 			try {
 				if (TokenAuthentication.isUserLoggedIn()) {
 
-					String nome = this.txtNome.getText();
-					int quantidade = Integer.parseInt(this.txtQuantidade.getText());
+					String nome = txtName.getText();
+					int quantity = Integer.parseInt(txtQuantity.getText());
 
-					Item item = new Item(nome, Integer.valueOf(quantidade));
+					Item item = new Item(nome, Integer.valueOf(quantity));
 
-					this.service.add(item);
-					desativarLabels();
-					this.btnSetaDireita.setVisible(true);
-					this.btnSetaEsquerda.setVisible(true);
-					AlertMsg.mostrarMensagem("Sucesso", "Item adicionado com sucesso!", true);
-					this.txtId.setVisible(true);
-					this.logs.logUserAction("item adicionado");
+					service.add(item);
+					disableLabels();
+					btnArrowRight.setVisible(true);
+					btnArrowLeft.setVisible(true);
+					AlertMsg.showMessage("Sucesso", "Item adicionado com sucesso!", true);
+					txtId.setVisible(true);
+					logs.logUserAction("item adicionado");
 				} else {
 
-					AlertMsg.mostrarMensagem("Erro",
+					AlertMsg.showMessage("Erro",
 							"Erro ao adicionar item, Você precisa estar logado para completar essa ação", false);
 					LoadScreen.showScreen("Login", LoginController.class, "login");
-					Stage stage = (Stage) this.btnAdicionar.getScene().getWindow();
+					Stage stage = (Stage) btnAdd.getScene().getWindow();
 					stage.close();
 				}
-				if ("ADICIONAR".equals(this.estado)) {
-					clickAdicionar();
+				if ("ADICIONAR".equals(state)) {
+					clickAdd();
 				}
 			} catch (Exception e) {
-				AlertMsg.mostrarMensagem("Erro", " todos campos devem ser preenchidos", false);
+				AlertMsg.showMessage("Erro", " todos campos devem ser preenchidos", false);
 				e.printStackTrace();
 			}
 		} else {
 
-			AlertMsg.mostrarMensagem("Erro", "Erro ao adicionar o item", false);
+			AlertMsg.showMessage("Erro", "Erro ao adicionar o item", false);
 		}
 	}
 
 	@FXML
-	private void removerItem() {
-		if (this.btnRemover.isVisible()) {
-			clickRemover();
+	private void removeItem() {
+		if (btnRemove.isVisible()) {
+			clickRemove();
 			try {
 				if (TokenAuthentication.isUserLoggedIn()) {
-					Long id = Long.valueOf(Long.parseLong(this.txtId.getText()));
-					this.service.remove(id);
-					this.txtNome.setVisible(true);
-					desativarLabels();
-					AlertMsg.mostrarMensagem("Sucesso", "Item removido com sucesso!", true);
-					this.logs.logUserAction("item removido");
-					carregarItens();
+					Long id = Long.valueOf(Long.parseLong(txtId.getText()));
+					service.remove(id);
+					txtName.setVisible(true);
+					disableLabels();
+					AlertMsg.showMessage("Sucesso", "Item removido com sucesso!", true);
+					logs.logUserAction("item removido");
+					LoadItems();
 				} else {
 
-					AlertMsg.mostrarMensagem("Erro",
+					AlertMsg.showMessage("Erro",
 							"Erro ao remover item, Você precisa estar logado para completar essa ação", false);
 					LoadScreen.showScreen("Login", LoginController.class, "login");
-					Stage stage = (Stage) this.btnRemover.getScene().getWindow();
+					Stage stage = (Stage) btnRemove.getScene().getWindow();
 					stage.close();
 				}
-				if ("REMOVER".equals(this.estado)) {
-					clickRemover();
+				if ("REMOVER".equals(state)) {
+					clickRemove();
 				}
 			} catch (Exception e) {
-				AlertMsg.mostrarMensagem("Erro", "Erro ao remover item: " + e.getMessage(), false);
+				AlertMsg.showMessage("Erro", "Erro ao remover item: " + e.getMessage(), false);
 				e.printStackTrace();
 			}
 		} else {
 
-			AlertMsg.mostrarMensagem("Erro", "Erro ao remover o item", false);
+			AlertMsg.showMessage("Erro", "Erro ao remover o item", false);
 		}
 	}
 
 	@FXML
-	private void alterarItem() {
-		if (this.btnAlterar.isVisible()) {
-			clickAlterar();
+	private void alterItem() {
+		if (btnAlter.isVisible()) {
+			clickAlter();
 			try {
 				if (TokenAuthentication.isUserLoggedIn()) {
 
-					Item itemEquals = itens.get(currentIndex);
+					Item itemEquals = items.get(currentIndex);
 					System.out.println(currentIndex);
 					Long id = Long.valueOf(Long.parseLong(txtId.getText()));
-					String nome = txtNome.getText();
-					int quantidade = Integer.parseInt(txtQuantidade.getText());
-					Item item = new Item(id, nome, Integer.valueOf(quantidade));
+					String name = txtName.getText();
+					int quantity = Integer.parseInt(txtQuantity.getText());
+					Item item = new Item(id, name, Integer.valueOf(quantity));
 					service.alterItem(item);
 					txtId.setVisible(true);
-					desativarLabels();
-					AlertMsg.mostrarMensagem("Sucesso", "Item alterado com sucesso!", true);
-					if (!(itemEquals.getQuantidade().equals(quantidade))
-							&& !(itemEquals.getNome().equals(nome))) {
+					disableLabels();
+					AlertMsg.showMessage("Sucesso", "Item alterado com sucesso!", true);
+					if (!(itemEquals.getQuantity().equals(quantity))
+							&& !(itemEquals.getName().equals(name))) {
 						logs.logUserAction(
-								"Nome alterado de: " + itemEquals.getNome() + " para: " + nome
-										+ "\n\n e Quantidade alterada de: " + String.valueOf(itemEquals.getQuantidade())
-										+ " para: " + quantidade);
+								"Nome alterado de: " + itemEquals.getName() + " para: " + name
+										+ "\n\n e Quantidade alterada de: " + String.valueOf(itemEquals.getQuantity())
+										+ " para: " + quantity);
 					}
 					
-					else if (!itemEquals.getQuantidade().equals(quantidade)) {
-						logs.logUserAction("Quantidade alterada de: " + itemEquals.getQuantidade().toString()
-								+ " para: " + quantidade);
+					else if (!itemEquals.getQuantity().equals(quantity)) {
+						logs.logUserAction("Quantidade alterada de: " + itemEquals.getQuantity().toString()
+								+ " para: " + quantity);
 					}
-					else if (!itemEquals.getNome().equals(nome)) {
+					else if (!itemEquals.getName().equals(name)) {
 						logs.logUserAction(
-								"Nome alterado de: " + itemEquals.getNome() + " para: " + nome);
+								"Nome alterado de: " + itemEquals.getName() + " para: " + name);
 					}
-					carregarItens();
+					LoadItems();
 				} else {
-					AlertMsg.mostrarMensagem("Erro",
+					AlertMsg.showMessage("Erro",
 							"Erro ao adicionar item, Você precisa estar logado para completar essa ação", false);
 					LoadScreen.showScreen("Login", LoginController.class, "login");
-					Stage stage = (Stage) this.btnAdicionar.getScene().getWindow();
+					Stage stage = (Stage) btnAdd.getScene().getWindow();
 					stage.close();
 				}
-				if ("ALTERAR".equals(this.estado)) {
-					clickAlterar();
+				if ("ALTERAR".equals(state)) {
+					clickAlter();
 				}
 			} catch (Exception e) {
-				AlertMsg.mostrarMensagem("Erro", "Erro ao alterar item: " + e.getMessage(), false);
+				AlertMsg.showMessage("Erro", "Erro ao alterar item: " + e.getMessage(), false);
 			}
 		} else {
 
-			AlertMsg.mostrarMensagem("Erro", "Erro ao alterar o item", false);
+			AlertMsg.showMessage("Erro", "Erro ao alterar o item", false);
 		}
 	}
 
 	@FXML
-	private void ListarTodosOsItens() {
+	private void ListAllItems() {
 		try {
 			// Inicia a escuta em tempo real para sempre atualizar os itens
 			repository.addRealTimeListener(new ValueEventListener() {
 				@Override
 				public void onDataChange(DataSnapshot dataSnapshot) {
-					List<Item> novaLista = new ArrayList<>();
+					List<Item> newList = new ArrayList<>();
 					for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 						Item item = snapshot.getValue(Item.class);
 						if (item != null) {
 							item.setFirebaseId(snapshot.getKey()); // Salva o ID único do Firebase
-							novaLista.add(item);
+							newList.add(item);
 						}
 					}
 
 					Platform.runLater(() -> {
-						// Atualiza a lista de itens e a interface com os novos dados
-						if (!novaLista.isEmpty()) {
-							itens = novaLista; // Atualiza a lista de itens
+						// Atualiza a lista de items e a interface com os novos dados
+						if (!newList.isEmpty()) {
+							items = newList; // Atualiza a lista de itens
 							currentIndex = 0; // Reseta para o primeiro item
-							preencherCampos(itens.get(currentIndex)); // Atualiza a UI
-							allItens.setText(itens.toString()); // Exibe todos os itens
+							fillInFields(items.get(currentIndex)); // Atualiza a UI
+							allItems.setText(items.toString()); // Exibe todos os itens
 						} else {
-							allItens.setText("Nenhum item encontrado.");
+							allItems.setText("Nenhum item encontrado.");
 						}
 					});
 				}
 
 				@Override
 				public void onCancelled(DatabaseError error) {
-					Platform.runLater(() -> AlertMsg.mostrarMensagem("Erro",
-							"Erro ao carregar itens: " + error.getMessage(), false));
+					Platform.runLater(() -> AlertMsg.showMessage("Erro",
+							"Erro ao carregar items: " + error.getMessage(), false));
 				}
 			});
 		} catch (Exception e) {
-			AlertMsg.mostrarMensagem("Erro", "Erro ao listar: " + e.getMessage(), false);
+			AlertMsg.showMessage("Erro", "Erro ao listar: " + e.getMessage(), false);
 		}
 	}
 
 	@FXML
-	private void moverEsquerda() {
+	private void moveLeft() {
 		try {
-			tirarFocus();
-			if (itens != null && !itens.isEmpty()) {
-				currentIndex = (currentIndex > 0) ? currentIndex - 1 : itens.size() - 1; // Move para o índice anterior
+			takeFocus();
+			if (items != null && !items.isEmpty()) {
+				currentIndex = (currentIndex > 0) ? currentIndex - 1 : items.size() - 1; // Move para o índice anterior
 																							// ou volta para o último
 																							// item
-				preencherCampos(itens.get(currentIndex));
+				fillInFields(items.get(currentIndex));
 			}
-			tirarFocus();
+			takeFocus();
 		} catch (Exception e) {
-			AlertMsg.mostrarMensagem("Erro", "Erro ao mover para a esquerda: " + e.getMessage(), false);
+			AlertMsg.showMessage("Erro", "Erro ao mover para a esquerda: " + e.getMessage(), false);
 		}
 	}
 
 	@FXML
-	private void moverEsquerdaPressed(KeyEvent event) {
+	private void moveLeftPressed(KeyEvent event) {
 		if (event.getCode() == KeyCode.LEFT) {
-			moverEsquerda();
+			moveLeft();
 		}
 	}
 
 	@FXML
-	private void moverDireita() {
-		tirarFocus();
+	private void moveRight() {
+		takeFocus();
 		try {
-			if (itens != null && !itens.isEmpty()) {
-				currentIndex = (currentIndex < itens.size() - 1) ? currentIndex + 1 : 0; // Move para o próximo índice
-				preencherCampos(itens.get(currentIndex));
+			if (items != null && !items.isEmpty()) {
+				currentIndex = (currentIndex < items.size() - 1) ? currentIndex + 1 : 0; // Move para o próximo índice
+				fillInFields(items.get(currentIndex));
 			}
 		} catch (Exception e) {
-			AlertMsg.mostrarMensagem("Erro", "Erro ao mover para a direita: " + e.getMessage(), false);
+			AlertMsg.showMessage("Erro", "Erro ao mover para a direita: " + e.getMessage(), false);
 		}
 	}
 
 	@FXML
-	private void moverDireitaPressed(KeyEvent event) {
+	private void moveRightPressed(KeyEvent event) {
 		if (event.getCode() == KeyCode.RIGHT) {
-			moverDireita();
+			moveRight();
 		}
 	}
 
 	@FXML
-	private void tirarFocus() {
+	private void takeFocus() {
 		// Desfoca todos os campos de texto ao navegar
 		Platform.runLater(() -> {
-			txtNome.getParent().requestFocus();
-			txtQuantidade.getParent().requestFocus();
+			txtName.getParent().requestFocus();
+			txtQuantity.getParent().requestFocus();
 			txtId.getParent().requestFocus();
 			txtId.setFocusTraversable(false);
-			txtNome.setFocusTraversable(false);
-			txtQuantidade.setFocusTraversable(false);
+			txtName.setFocusTraversable(false);
+			txtQuantity.setFocusTraversable(false);
 		});
 	}
 
 	@FXML
-	private void voltarFocus() {
+	private void backFocus() {
 		Platform.runLater(() -> {
 			txtId.requestFocus();
 			txtId.setFocusTraversable(true);
-			txtNome.setFocusTraversable(true);
-			txtQuantidade.setFocusTraversable(true);
+			txtName.setFocusTraversable(true);
+			txtQuantity.setFocusTraversable(true);
 		});
 	}
 
 	@FXML
 	private void enterPressed(KeyEvent event) {
 		if (event.getCode() == KeyCode.ENTER) {
-			event.consume();// evita que o Enter seja chamado mais de 1x em uma unica requisiçãoS
-			if (btnAdicionar.isVisible()) {
-				adicionarItem();
-			} else if (btnRemover.isVisible()) {
-				removerItem();
-			} else if (btnAlterar.isVisible()) {
-				alterarItem();
+			event.consume();// evita que o Enter seja chamado mais de 1x em uma unica requisição
+			if (btnAdd.isVisible()) {
+				addItem();
+			} else if (btnRemove.isVisible()) {
+				removeItem();
+			} else if (btnAlter.isVisible()) {
+				alterItem();
 			}
 		}
 	} 
 	
 	// Carrega todos os itens para navegar
 	@FXML
-	private void buscarPorId() {
+	private void findById() {
 		try {
 			Item item = new Item();
 			item = service.findById(Long.parseLong(txtId.getText())).join();
-			currentIndex = itens.indexOf(item);
-			preencherCampos(item);
+			currentIndex = items.indexOf(item);
+			fillInFields(item);
 		} catch (Exception e) {
-			AlertMsg.mostrarMensagem("Erro", "Erro ao carregar o item: " + "id não existe", false);
+			AlertMsg.showMessage("Erro", "Erro ao carregar o item: " + "id não existe", false);
 		}
 	}
 	
-	private void preencherCampos(Item item) {
+	private void fillInFields(Item item) {
 		txtId.setText(String.valueOf(item.getId()));
-		txtNome.setText(item.getNome());
-		txtQuantidade.setText(String.valueOf(item.getQuantidade()));
-		if (btnRemover.isVisible()) {
-			labelNomeAttTela.setText(item.getNome());
-			labelQuantidadeAttTela.setText(String.valueOf(item.getQuantidade()));
+		txtName.setText(item.getName());
+		txtQuantity.setText(String.valueOf(item.getQuantity()));
+		if (btnRemove.isVisible()) {
+			labelNameUpdateScreen.setText(item.getName());
+			labelQuantityUpdateScreen.setText(String.valueOf(item.getQuantity()));
 		}
-		if (btnAdicionar.isVisible()) {
-			labelIdAttTela.setText(String.valueOf(item.getId()));
+		if (btnAdd.isVisible()) {
+			labelIdUpdateScreen.setText(String.valueOf(item.getId()));
 		}
-		if (btnAlterar.isVisible()) {
-			labelIdAttTela.setText(String.valueOf(item.getId()));
+		if (btnAlter.isVisible()) {
+			labelIdUpdateScreen.setText(String.valueOf(item.getId()));
 		}
 	}
 
 
-	public void carregarItens() {
+	public void LoadItems() {
 		try {
 			repository.addRealTimeListener(new ValueEventListener() {
 				@Override
 				public void onDataChange(DataSnapshot dataSnapshot) {
-					List<Item> novaLista = new ArrayList<>();
+					List<Item> newList = new ArrayList<>();
 					for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
 						Item item = snapshot.getValue(Item.class);
 						if (item != null) {
 							item.setFirebaseId(snapshot.getKey()); // Salva o ID único do Firebase
-							novaLista.add(item);
+							newList.add(item);
 						}
 					}
 
 					Platform.runLater(() -> {
-						if (!novaLista.isEmpty()) {
-							itens = novaLista; // Atualiza a lista de itens
+						if (!newList.isEmpty()) {
+							items = newList; // Atualiza a lista de itens
 							currentIndex = 0; // Reseta para o primeiro item
-							preencherCampos(itens.get(currentIndex)); // Atualiza a UI
+							fillInFields(items.get(currentIndex)); // Atualiza a UI
 						} else {
-							AlertMsg.mostrarMensagem("Nenhum item", "Nenhum item foi encontrado.", false);
+							AlertMsg.showMessage("Nenhum item", "Nenhum item foi encontrado.", false);
 						}
 					});
 				}
 
 				@Override
 				public void onCancelled(DatabaseError error) {
-					Platform.runLater(() -> AlertMsg.mostrarMensagem("Erro",
+					Platform.runLater(() -> AlertMsg.showMessage("Erro",
 							"Erro ao carregar itens: " + error.getMessage(), false));
 				}
 			});
 		} catch (Exception e) {
-			AlertMsg.mostrarMensagem("Erro", "Erro ao carregar os itens: " + e.getMessage(), false);
+			AlertMsg.showMessage("Erro", "Erro ao carregar os items: " + e.getMessage(), false);
 		}
 	}
 

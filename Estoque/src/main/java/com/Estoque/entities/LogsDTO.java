@@ -7,25 +7,25 @@ import javafx.beans.property.StringProperty;
 public class LogsDTO {
 
     private final StringProperty email;
-    private final StringProperty data;
-    private final StringProperty mensagem;
+    private final StringProperty date;
+    private final StringProperty message;
 
 	
-	public LogsDTO(String email, String data, String mensagem) {
+	public LogsDTO(String email, String date, String message) {
 		this.email = new SimpleStringProperty(email);
-		this.data = new SimpleStringProperty(data);
-		this.mensagem = new SimpleStringProperty(mensagem);
+		this.date = new SimpleStringProperty(date);
+		this.message = new SimpleStringProperty(message);
 	}
 	 public StringProperty email() {
 	        return email;
 	    }
 
-	    public StringProperty data() {
-	        return data;
+	    public StringProperty date() {
+	        return date;
 	    }
 
-	    public StringProperty mensagem() {
-	        return mensagem;
+	    public StringProperty message() {
+	        return message;
 	    }
 	
 }

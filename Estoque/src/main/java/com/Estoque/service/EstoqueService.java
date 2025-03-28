@@ -52,7 +52,7 @@ public class EstoqueService {
             // Agora temos o firebaseId, vamos buscar o item no Firebase para atualizar com os novos dados
         String firebaseId = existingItem.getFirebaseId();
         repository.deleteById(firebaseId);
-        reordenarIds(); // Chama a função para reordenar IDs
+        reorderIds(); // Chama a função para reordenar IDs
     });
     }
 
@@ -88,8 +88,8 @@ public class EstoqueService {
             String firebaseId = existingItem.getFirebaseId();
 
             // Atualizar os campos do item (nome e quantidade)
-            existingItem.setNome(item.getNome());
-            existingItem.setQuantidade(item.getQuantidade());
+            existingItem.setName(item.getName());
+            existingItem.setQuantity(item.getQuantity());
 
             // Agora, usando o firebaseId, vamos atualizar o item no Firebase
             repository.updateItem(firebaseId, existingItem);
@@ -102,10 +102,10 @@ public class EstoqueService {
     }
 
     
-    private void reordenarIds() {
-        repository.findAll().thenAcceptAsync(itens -> {
-            for (int i = 0; i < itens.size(); i++) {
-                Item item = itens.get(i);
+    private void reorderIds() {
+        repository.findAll().thenAcceptAsync(items -> {
+            for (int i = 0; i < items.size(); i++) {
+                Item item = items.get(i);
                 item.setId((long) (i + 1)); // Reatribui um ID sequencial
                 repository.updateItem(item.getFirebaseId(), item); // Atualiza no Firebase
             }

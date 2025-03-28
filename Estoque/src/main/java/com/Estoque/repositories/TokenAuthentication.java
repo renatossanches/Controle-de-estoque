@@ -22,7 +22,7 @@ public class TokenAuthentication {
     private String idToken;
 
     // Método para garantir que o arquivo de configuração exista no diretório do usuário
-    private static void garantirArquivoConfiguracao() {
+    private static void ensureFileConfiguration() {
         File configFile = new File(CONFIG_FILE_PATH);
 
         // Se o arquivo não existe, extraí-lo do JAR ou criá-lo
@@ -44,7 +44,7 @@ public class TokenAuthentication {
     }
 
     // Método para autenticar com email e senha
-    public Map<String, String> authenticateWithEmailAndPassword(String email, String senha) throws IOException {
+    public Map<String, String> authenticateWithEmailAndPassword(String email, String password) throws IOException {
         URL url = new URL(FIREBASE_API_URL);
         HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
         connection.setRequestMethod("POST");
@@ -54,7 +54,7 @@ public class TokenAuthentication {
         // Corpo da requisição em JSON
         JSONObject jsonInput = new JSONObject();
         jsonInput.put("email", email);
-        jsonInput.put("password", senha);
+        jsonInput.put("password", password);
         jsonInput.put("returnSecureToken", true);
 
         try (OutputStream os = connection.getOutputStream()) {
@@ -71,18 +71,18 @@ public class TokenAuthentication {
             }
 
             JSONObject jsonResponse = new JSONObject(response.toString());
-            this.authToken = jsonResponse.getString("refreshToken");
-            this.idToken = jsonResponse.getString("idToken");
+            authToken = jsonResponse.getString("refreshToken");
+            idToken = jsonResponse.getString("idToken");
 
             Map<String, String> tokens = new HashMap<>();
-            tokens.put("idToken", this.idToken);
-            tokens.put("refreshToken", this.authToken);
+            tokens.put("idToken", idToken);
+            tokens.put("refreshToken", authToken);
             return tokens;
         }
     }
 
     // Método para atualizar o ID token
-    public static Map<String, String> atualizarIdToken(String refreshToken) throws IOException {
+    public static Map<String, String> updateIdToken(String refreshToken) throws IOException {
         URL url = new URL(urlStr);
         HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
         connection.setRequestMethod("POST");
@@ -118,8 +118,8 @@ public class TokenAuthentication {
     }
 
     // Método para salvar tokens no arquivo de configuração
-    public static void salvarTokenNoArquivo(Map<String, String> tokens) {
-        garantirArquivoConfiguracao();  // Garante que o arquivo de configuração existe
+    public static void salveTokenInFile(Map<String, String> tokens) {
+        ensureFileConfiguration();  // Garante que o arquivo de configuração existe
         Properties properties = new Properties();
 
         try (FileInputStream fis = new FileInputStream(CONFIG_FILE_PATH)) {
@@ -138,8 +138,8 @@ public class TokenAuthentication {
     }
 
     // Método para carregar os tokens do arquivo de configuração
-    public static Map<String, String> carregarToken() {
-        garantirArquivoConfiguracao();  // Garante que o arquivo de configuração exista
+    public static Map<String, String> loadToken() {
+        ensureFileConfiguration();  // Garante que o arquivo de configuração exista
         Properties properties = new Properties();
         Map<String, String> tokens = new HashMap<>();
 
@@ -158,8 +158,8 @@ public class TokenAuthentication {
     }
 
     // Método para remover os tokens do arquivo de configuração
-    public static void removerToken() {
-        garantirArquivoConfiguracao();  // Garante que o arquivo de configuração existe
+    public static void removeToken() {
+        ensureFileConfiguration();  // Garante que o arquivo de configuração existe
         Properties properties = new Properties();
 
         try (FileInputStream fis = new FileInputStream(CONFIG_FILE_PATH)) {
@@ -180,13 +180,13 @@ public class TokenAuthentication {
 
     // Método para verificar se o usuário está logado
     public static boolean isUserLoggedIn() {
-        Map<String, String> tokens = carregarToken();
+        Map<String, String> tokens = loadToken();
         String refreshToken = tokens.get("refreshToken");
 
         if (refreshToken != null && !refreshToken.isBlank()) {
             try {
-                Map<String, String> newTokens = atualizarIdToken(refreshToken);  // Atualiza o ID token
-                salvarTokenNoArquivo(newTokens);  // Salva os tokens atualizados
+                Map<String, String> newTokens = updateIdToken(refreshToken);  // Atualiza o ID token
+                salveTokenInFile(newTokens);  // Salva os tokens atualizados
                 return true;
             } catch (IOException e) {
                 System.out.println("Erro ao atualizar o token: " + e.getMessage());
@@ -203,7 +203,7 @@ public class TokenAuthentication {
     }
 
     public void logout() {
-        this.authToken = null;
-        this.idToken = null;
+        authToken = null;
+        idToken = null;
     }
 }

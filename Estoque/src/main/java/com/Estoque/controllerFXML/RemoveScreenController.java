@@ -1,7 +1,3 @@
-// 
-// Decompiled by Procyon v0.6.0
-// 
-
 package com.Estoque.controllerFXML;
 
 import javafx.stage.Stage;
@@ -22,7 +18,7 @@ import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
 
 @Component
-@FxmlView("/com/Estoque/gui/removeScreen.fxml")
+@FxmlView("/com/Estoque/gui/RemoveScreen.fxml")
 public class RemoveScreenController
 {
     @Autowired
@@ -32,10 +28,10 @@ public class RemoveScreenController
     private LogsRepository logs;
     
     @FXML
-    private TextField txtRemover;
+    private TextField txtRemove;
     
     @FXML
-    private Button btnRemoverQuantidade;
+    private Button btnRemoveQuantity;
     
     @FXML
     private Label labelItem;
@@ -43,7 +39,7 @@ public class RemoveScreenController
     private Runnable onCloseCallback;
     
     public RemoveScreenController() {
-        this.labelItem = new Label();
+        labelItem = new Label();
     }
     
     @FXML
@@ -51,47 +47,47 @@ public class RemoveScreenController
     }
     
     @FXML
-    private void enterPressed(final KeyEvent event) {
+    private void enterPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
             event.consume();
-            if (this.btnRemoverQuantidade.isVisible()) {
-                this.remover();
+            if (btnRemoveQuantity.isVisible()) {
+                remove();
             }
         }
     }
     
     @FXML
-    private void remover() {
+    private void remove() {
         try {
             if (TokenAuthentication.isUserLoggedIn()) {
-                final int quantidadeRemover = Integer.parseInt(this.txtRemover.getText());
-                this.item.setQuantidade(Integer.valueOf(this.item.getQuantidade() - quantidadeRemover));
-                this.service.alterItem(this.item);
-                AlertMsg.mostrarMensagem("Sucesso", "Quantidade removida com sucesso", true);
-                this.logs.logUserAction("Quantidade removida: " + quantidadeRemover);
-                if (this.onCloseCallback != null) {
-                    this.onCloseCallback.run();
+                int QuantityRemove = Integer.parseInt(txtRemove.getText());
+                item.setQuantity(Integer.valueOf(item.getQuantity() - QuantityRemove));
+                service.alterItem(item);
+                AlertMsg.showMessage("Sucesso", "Quantidade removida com sucesso", true);
+                logs.logUserAction("Quantidade removida: " + QuantityRemove);
+                if (onCloseCallback != null) {
+                    onCloseCallback.run();
                 }
-                this.fecharTela();
+                closeScreen();
             }
             else {
-                AlertMsg.mostrarMensagem("Erro", "Erro ao adcionar a quantidade, Voc\u00ea precisa estar logado para completar essa a\u00e7\u00e3o", false);
+                AlertMsg.showMessage("Erro", "Erro ao adcionar a Quantidade, Você precisa estar logado para completar essa ação", false);
                 LoadScreen.showScreen("Login", LoginController.class, "login");
-                final Stage stage = (Stage)this.btnRemoverQuantidade.getScene().getWindow();
+                final Stage stage = (Stage)btnRemoveQuantity.getScene().getWindow();
                 stage.close();
             }
         }
         catch (final Exception e) {
-            AlertMsg.mostrarMensagem("Erro", "A quantidade deve ser preenchida", false);
+            AlertMsg.showMessage("Erro", "A Quantidade deve ser preenchida", false);
         }
     }
     
-    private void fecharTela() {
-        final Stage stage = (Stage)this.btnRemoverQuantidade.getScene().getWindow();
+    private void closeScreen() {
+        final Stage stage = (Stage)btnRemoveQuantity.getScene().getWindow();
         stage.close();
     }
     
-    public void receberItem(final Item item, final Runnable onCloseCallback) {
+    public void receiveItem(Item item, Runnable onCloseCallback) {
         this.item = item;
         this.onCloseCallback = onCloseCallback;
         this.labelItem.setText(item.toString());

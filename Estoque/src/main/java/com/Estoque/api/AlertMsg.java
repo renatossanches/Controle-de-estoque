@@ -8,29 +8,26 @@ import javafx.stage.Stage;
 public class AlertMsg {
 
     private static Image alertError = new Image("/images/alertError.png"); 
-    private static Image alertSucesso = new Image("/images/alertSucesso.png");
-    
-    //true = deu certo
-    //false = não deu certo
-    
-    
-    public static void mostrarMensagem(String titulo, String mensagem, boolean resp) {
-    	Image simbolo;
-    	if(resp == true) {
-    		simbolo = alertSucesso;
+    private static Image alertSuccess = new Image("/images/alertSuccess.png");
+      
+    //       true = deu certo              ||||||||     false = não deu certo
+    public static void showMessage(String title, String message, boolean isSuccess) {
+    	Image symbol;
+    	if(isSuccess == true) {
+    		symbol = alertSuccess;
         }
     	else {
-    		simbolo = alertError;
+    		symbol = alertError;
     	}
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(titulo); 
-        alert.setContentText(mensagem);
-        ImageView ajustesDoSimbolo = new ImageView(simbolo);
-        ajustesDoSimbolo.setFitHeight(30);
-        ajustesDoSimbolo.setFitWidth(30);
-        alert.setGraphic(ajustesDoSimbolo); // mudar icone ao lado da mensagem
+        alert.setTitle(title); 
+        alert.setContentText(message);
+        ImageView symbolAdjustments = new ImageView(symbol);
+        symbolAdjustments.setFitHeight(30);
+        symbolAdjustments.setFitWidth(30);
+        alert.setGraphic(symbolAdjustments); // mudar icone ao lado da mensagem
         Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-        stage.getIcons().add(simbolo); //mudar icone da pagina 
+        stage.getIcons().add(symbol); //mudar icone da pagina 
 
         alert.showAndWait();
     }

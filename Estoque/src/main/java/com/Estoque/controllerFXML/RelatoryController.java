@@ -23,7 +23,7 @@ import net.rgielen.fxweaver.core.FxWeaver;
 import net.rgielen.fxweaver.core.FxmlView;
 
 @Component
-@FxmlView("/com/Estoque/gui/Relatorio.fxml")
+@FxmlView("/com/Estoque/gui/Relatory.fxml")
 public class RelatoryController {
 	
 	@Autowired
@@ -33,69 +33,69 @@ public class RelatoryController {
 	private ConfigurableApplicationContext context;
 	
 	@FXML
-	private DatePicker datePickerInicial;
+	private DatePicker datePickerInitial;
 	
 	@FXML
 	private DatePicker datePickerFinal;
 	
 	@FXML
-	private Button btnGerarDados;
+	private Button btnGenerateData;
 	
 	@FXML
-	private Button btnGerarTabela;
+	private Button btnGenerateTable;
 	
     
     @FXML
     private void enterPressed(KeyEvent event) {
 		if (event.getCode() == KeyCode.ENTER) {
-			event.consume();// evita que o Enter seja chamado mais de 1x em uma unica requisiçãoS
+			event.consume();// evita que o Enter seja chamado mais de 1x em uma unica requisições
 			
-			if(btnGerarDados.isVisible()) {
-				gerarDados(); 
+			if(btnGenerateData.isVisible()) {
+				generateData(); 
 			}
 		}
 }
 	
 	@FXML
-	private void gerarDados() {
-	    LocalDate dataInicial = datePickerInicial.getValue();
-	    LocalDate dataFinal = datePickerFinal.getValue();
-    	if(dataInicial.isBefore(dataFinal) && dataFinal.isAfter(dataInicial)) {
-	    List<Map<String, Object>> resultado = logs.getLogsByDateRange(dataInicial, dataFinal);
+	private void generateData() {
+	    LocalDate dateInitial = datePickerInitial.getValue();
+	    LocalDate dateFinal = datePickerFinal.getValue();
+    	if(dateInitial.isBefore(dateFinal) && dateFinal.isAfter(dateInitial)) {
+	    List<Map<String, Object>> result = logs.getLogsByDateRange(dateInitial, dateFinal);
 	
-	        String caminhoArquivo = System.getProperty("user.home") + "/Downloads/logs_gerados.pdf";
-	        logs.generateLogsPDF(resultado, caminhoArquivo);
-	        AlertMsg.mostrarMensagem("Sucesso", "Arquivo gerado para: "+ caminhoArquivo, true);
-	        fecharTela();
+	        String filePath = System.getProperty("user.home") + "/Downloads/logs_gerados.pdf";
+	        logs.generateLogsPDF(result, filePath);
+	        AlertMsg.showMessage("Sucesso", "Arquivo gerado para: "+ filePath, true);
+	        closeScreen();
     	}
     	else {
-        	AlertMsg.mostrarMensagem("Erro", "A data final não pode ser antes da inicial", false);
+        	AlertMsg.showMessage("Erro", "A data final não pode ser antes da inicial", false);
     	}
 	}
 	
 	
 	@FXML
-	private void gerarDadosEmTabela() {
-	    LocalDate dataInicial = datePickerInicial.getValue();
-	    LocalDate dataFinal = datePickerFinal.getValue();
-    	if(dataInicial.isBefore(dataFinal) && dataFinal.isAfter(dataInicial)) {
-	    List<Map<String, Object>> resultado = logs.getLogsByDateRange(dataInicial, dataFinal);
+	private void generateTableData() {
+	    LocalDate dateInitial = datePickerInitial.getValue();
+	    LocalDate dateFinal = datePickerFinal.getValue();
+    	if(dateInitial.isBefore(dateFinal) && dateFinal.isAfter(dateInitial)) {
+	    List<Map<String, Object>> result = logs.getLogsByDateRange(dateInitial, dateFinal);
 		Platform.runLater(() ->{
 			LoadScreen.showScreen("Dados em tabela", RelatoryControllerData.class, "relatorio");
 			FxWeaver fx= context.getBean(FxWeaver.class);
 			RelatoryControllerData controllerData = fx.getBean(RelatoryControllerData.class);
-			controllerData.receberResultado(resultado);
+			controllerData.receiveResult(result);
 		});
-        fecharTela();
+		closeScreen();
     	}
     	else {
-        	AlertMsg.mostrarMensagem("Erro", "A data final não pode ser antes da inicial", false);
+        	AlertMsg.showMessage("Erro", "A data final não pode ser antes da inicial", false);
     	}
 	}
 	
-    private void fecharTela() {
+    private void closeScreen() {
         // Fechar a janela de remoção
-        Stage stage = (Stage) btnGerarDados.getScene().getWindow();
+        Stage stage = (Stage) btnGenerateData.getScene().getWindow();
         stage.close();
     }
 }
