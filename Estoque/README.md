@@ -24,6 +24,94 @@ Aqui deixo um projeto bem simples de Controle de Estoque feito em:
 # Sobre o projeto: 
 Se necessário mandar mensagem para o Email: renato.sanches2004@gmail.com la tentarei solucionar seu problema da melhor forma possivel.
 
+# Estrutura do projeto
+
+```
+├── Estoque
+    ├── .gitattributes
+    ├── .gitignore
+    ├── README.md
+    ├── dependency-reduced-pom.xml
+    ├── help.txt
+    ├── jre_custom.rar
+    ├── mvnw
+    ├── mvnw.cmd
+    ├── pom.xml
+    └── src
+    │   ├── build.fxbuild
+    │   └── main
+    │       ├── java
+    │           ├── build.fxbuild
+    │           └── com
+    │           │   └── Estoque
+    │           │       ├── Application.java
+    │           │       ├── EstoqueApp.java
+    │           │       ├── Main.java
+    │           │       ├── api
+    │           │           ├── AlertMsg.java
+    │           │           ├── IdAutoIncrement.java
+    │           │           ├── LoadFonts.java
+    │           │           └── LoadScreen.java
+    │           │       ├── config
+    │           │           └── FirebaseConfig.java
+    │           │       ├── controllerFXML
+    │           │           ├── AddScreenController.java
+    │           │           ├── AlterScreenController.java
+    │           │           ├── ItemControllerFXML.java
+    │           │           ├── LoginController.java
+    │           │           ├── RelatoryController.java
+    │           │           ├── RelatoryControllerData.java
+    │           │           ├── RemoveScreenController.java
+    │           │           └── ViewTableController.java
+    │           │       ├── entities
+    │           │           ├── Item.java
+    │           │           └── LogsDTO.java
+    │           │       ├── exception
+    │           │           └── ExceptionService.java
+    │           │       ├── repositories
+    │           │           ├── EstoqueRepository.java
+    │           │           ├── LogsRepository.java
+    │           │           └── TokenAuthentication.java
+    │           │       └── service
+    │           │           └── EstoqueService.java
+    │       └── resources
+    │           ├── META-INF
+    │               └── additional-spring-configuration-metadata.json
+    │           ├── application.properties
+    │           ├── com
+    │               └── Estoque
+    │               │   └── gui
+    │               │       ├── AddScreen.fxml
+    │               │       ├── AlterScreen.fxml
+    │               │       ├── ItemEstoque.fxml
+    │               │       ├── Login.fxml
+    │               │       ├── Relatory.fxml
+    │               │       ├── RelatoryData.fxml
+    │               │       ├── RemoveScreen.fxml
+    │               │       └── ViewTable.fxml
+    │           ├── contents
+    │               ├── screen2.css
+    │               └── style.css
+    │           ├── fonts
+    │               ├── RETROTECH.ttf
+    │               ├── game_over.ttf
+    │               ├── goldenAge.ttf
+    │               ├── good_timing.otf
+    │               ├── ka1.ttf
+    │               └── unlearn.ttf
+    │           └── images
+    │               ├── alertError.png
+    │               ├── alertSuccess.png
+    │               ├── background.jpg
+    │               ├── btnAdd.png
+    │               ├── btnAlter.png
+    │               ├── btnRemove.png
+    │               ├── ico.png
+    │               ├── login.png
+    │               ├── relatory.png
+    │               └── spreadsheet.png
+└── README.md
+```
 
 
 # Passo a passo de como criar a aplicação como executável:
