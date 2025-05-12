@@ -45,7 +45,12 @@ public class FirebaseConfig {
     InputStream serviceAccount = (new ClassPathResource("adm.json")).getInputStream();
     if (serviceAccount == null)
       throw new IOException("Não foi encontrar o arquivo de credenciais: " + this.firebaseConfigPath); 
-    FirebaseOptions options = (new FirebaseOptions.Builder()).setCredentials(GoogleCredentials.fromStream(serviceAccount)).setDatabaseUrl("https://ColoqueAquiSeuBancoDeDados-default-rtdb.firebaseio.com").build();
+    FirebaseOptions options = (
+    		new FirebaseOptions.Builder())
+    		.setCredentials(GoogleCredentials
+    		.fromStream(serviceAccount))
+    		.setDatabaseUrl("https://ColoqueAquiSeuBancoDeDados-default-rtdb.firebaseio.com") /* <<-- Coloque  seu banco*/
+    		.build();
     if (FirebaseApp.getApps().isEmpty())
       FirebaseApp.initializeApp(options); 
     return FirebaseDatabase.getInstance();

@@ -73,8 +73,8 @@ public class ViewTableController {
     public void initialize() {
         // Definir as células das colunas
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        colName.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        colQuantity.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
         // Configurar as colunas de botões
         configurateColumnAlter();

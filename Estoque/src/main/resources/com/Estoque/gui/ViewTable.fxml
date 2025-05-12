@@ -29,7 +29,7 @@
       </TableView>
       <Label layoutX="1217.0" layoutY="122.0" prefHeight="302.0" prefWidth="200.0" styleClass="label-items" text="Os botões de alterar e deletar tem a funções exclusivamente para modificar a quantidade" wrapText="true" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="122.0" />
       <Label layoutX="1239.0" layoutY="86.0" style="-fx-font-weight: bold;" styleClass="label-items" text="Atenção!!!" textFill="RED" AnchorPane.rightAnchor="33.200000000000045" AnchorPane.topAnchor="86.0" />
-      <Button layoutX="1250.0" layoutY="9.0" mnemonicParsing="false" onAction="#callAccessScreen" prefWidth="133.0" styleClass="button-adicionar" text="ACESSOS" AnchorPane.rightAnchor="6.599999999999994" />
+      <Button layoutX="1250.0" layoutY="9.0" mnemonicParsing="false" onAction="#callAccessScreen" prefWidth="133.0" styleClass="button-add" text="ACESSOS" AnchorPane.rightAnchor="6.599999999999994" />
 
    </children>
    <stylesheets>

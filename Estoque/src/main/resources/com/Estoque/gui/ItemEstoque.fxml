@@ -24,7 +24,7 @@
       </StackPane>
         <HBox alignment="CENTER" layoutX="2.0" layoutY="271.2" prefHeight="52.0" prefWidth="1330.0" spacing="20.0" AnchorPane.leftAnchor="-48.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="271.0">
 			<children>
-				<Button id="btnAdd fx:id="btnAdd" graphicTextGap="0.0" mnemonicParsing="false" onAction="#addItem" prefHeight="38.0" prefWidth="154.0" styleClass="button-add" text="ADICIONAR">
+				<Button id="btnAdd" fx:id="btnAdd" graphicTextGap="0.0" mnemonicParsing="false" onAction="#addItem" prefHeight="38.0" prefWidth="154.0" styleClass="button-add" text="ADICIONAR">
                <font>
                   <Font name="Bodoni MT Poster Compressed" size="13.0" />
                </font>
